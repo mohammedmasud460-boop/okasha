@@ -77,7 +77,7 @@
             height: 110px;
             border: 2px solid #2c3e50;
             display: inline-block;
-            position: relative;
+             position: relative;
         }
         .qr::before, .qr::after {
             content: "";

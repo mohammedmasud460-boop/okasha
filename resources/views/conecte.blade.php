@@ -227,16 +227,16 @@ margin: auto;
           <a href="#"><img src="{{asset('image/logono.png')}}" alt="logo"></a>
             <div class="nav-links" id="navLinks">
                 <i class="bxl bx-instagram" onclick="hideMenu()"></i>
-                <ul>
-                    <li class="name2"><a href="#" >الصفحة الرئيسية</a></li>
+                 <ul>
+                    <li class="name1"><a href="#" >الصفحة الرئيسية</a></li>
                     <li class="name2"><a href="{{ route('register') }}">الجهات التعليمية</a></li>
-                    <li class="name2"><a href="">خدماتنا</a></li>
+                    <li class="name2"><a href="{{ route('services') }}">خدماتنا</a></li>
                     <li class="name2" ><a href="#">الاسئلة الشائعة</a></li>
-                    <li class="name1"><a href="#">من نحن</a></li>
+                    <li class="name2"><a href="{{ route('about') }}">من نحن</a></li>
                     
                 </ul>
             </div>
-            <i class="bxl bx-instagram"onclick="showMenu()"></i>
+            <i class="bxl bx-instagram"onclick="showMenu()">zz</i>
         </nav>
       <h1>من نحن</h1>
     </section>
@@ -249,7 +249,10 @@ margin: auto;
         }
              function hideMenu(){
             navLinks.style.left = "-200px";
+            
         }
+
+        
         </script>
         <section class="map">
         <iframe  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d302031.4651109162!2d39.46125092568561!3d21.40529958738623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sar!2ssa!4v1766015657119!5m2!1sar!2ssa" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

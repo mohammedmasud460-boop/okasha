@@ -3,12 +3,19 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CertificateController;
-
+// عرض الصفحات 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome1');
 });
-
-
+Route::get('/services',function (){
+return view('services');
+})->name('services');
+Route::get('/about',function (){
+return view('about');
+})->name('about');
+Route::get('/conecte',function (){
+return view('conecte');
+})->name('conecte');
 
 // مسار عرض لوحة التحكم الرئيسية
 Route::get('/dashboard', function () {
@@ -70,7 +77,7 @@ Route::get('certificates/certificate3/download/{student}', [CertificateControlle
 
 Route::get('home',[CertificateController::class,'download1'])->name('home');
 
-use App\Http\Controllers\YourController;
+
 
 Route::get('/certificate/image', [CertificateController::class, 'imge'])
     ->name('certificate.image');

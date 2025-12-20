@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="{{asset('image/logono.png')}}" type="image/x-icon">
     <title>منصة شهادتي</title>
     <style>
-        *{
+     git clone https://github.com/mohammedmasud460-boop/okasha.git  *{
             margin: 0;
             padding: 0;
             
@@ -194,12 +194,12 @@ font-size: x-large;
           <a href="#"><img src="{{asset('image/logono.png')}}" alt="logo"></a>
             <div class="nav-links" id="navLinks">
                 <i class="bxl bx-instagram" onclick="hideMenu()"></i>
-                <ul>
-                    <li class="name2"><a href="#" >الصفحة الرئيسية</a></li>
+               <ul>
+                    <li class="name1"><a href="#" >الصفحة الرئيسية</a></li>
                     <li class="name2"><a href="{{ route('register') }}">الجهات التعليمية</a></li>
-                    <li class="name2"><a href="">خدماتنا</a></li>
-                    <li class="name2" ><a href="#">الاسئلة الشائعة</a></li>
-                    <li class="name1"><a href="#">من نحن</a></li>
+                    <li class="name2"><a href="{{ route('services') }}">خدماتنا</a></li>
+                    <li class="name2" ><a href="{{ route('conecte') }}">الاسئلة الشائعة</a></li>
+                    <li class="name2"><a href="#">من نحن</a></li>
                     
                 </ul>
             </div>

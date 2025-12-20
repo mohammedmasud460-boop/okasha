@@ -107,7 +107,7 @@
 nav .bxl{
     display: none;
 }
-@media (max-width: 700px)
+@media (max-width: 700px){
     .text-box h1{
         font-size: 30px;
     }
@@ -142,7 +142,7 @@ nav .bxl{
 nav img{
     width: 120px;
 
-}
+}}
 
 
     </style>
@@ -156,13 +156,13 @@ nav img{
                 <ul>
                     <li class="name1"><a href="#" >الصفحة الرئيسية</a></li>
                     <li class="name2"><a href="{{ route('register') }}">الجهات التعليمية</a></li>
-                    <li class="name2"><a href="">خدماتنا</a></li>
-                    <li class="name2" ><a href="#">الاسئلة الشائعة</a></li>
-                    <li class="name2"><a href="#">من نحن</a></li>
+                    <li class="name2"><a href="{{ route('services') }}">خدماتنا</a></li>
+                    <li class="name2" ><a href="conecte">الاسئلة الشائعة</a></li>
+                    <li class="name2"><a href="{{ route('about') }}">من نحن</a></li>
                     
                 </ul>
             </div>
-            <i class="bxl bx-instagram"onclick="showMenu()"></i>
+            <i class="bxl bx-instagram"onclick="showMenu()">cc</i>
         </nav>
         <div class="text-box">
             <h1>مرحبا بكم في منصة شهادتي</h1>

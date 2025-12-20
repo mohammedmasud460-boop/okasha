@@ -225,16 +225,16 @@ background-size: cover;}
           <a href="#"><img src="{{asset('image/logono.png')}}" alt="logo"></a>
             <div class="nav-links" id="navLinks">
                 <i class="bxl bx-instagram" onclick="hideMenu()"></i>
-                <ul>
+              <ul>
                     <li class="name1"><a href="#" >الصفحة الرئيسية</a></li>
                     <li class="name2"><a href="{{ route('register') }}">الجهات التعليمية</a></li>
-                    <li class="name2"><a href="">خدماتنا</a></li>
-                    <li class="name2" ><a href="#">الاسئلة الشائعة</a></li>
-                    <li class="name2"><a href="#">من نحن</a></li>
+                    <li class="name2"><a href="#">خدماتنا</a></li>
+                    <li class="name2" ><a href="{{ route('conecte') }}">الاسئلة الشائعة</a></li>
+                    <li class="name2"><a href="{{ route('about') }}">من نحن</a></li>
                     
                 </ul>
             </div>
-            <i class="bxl bx-instagram"onclick="showMenu()"></i>
+            <i class="bxl bx-instagram"onclick="showMenu()">cc</i>
         </nav>
           <h2 class="heading">Our <span>Services</span></h2>
     </section>
