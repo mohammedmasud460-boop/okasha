@@ -1,68 +1,156 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8">
-    <title>شهادة إنجاز - {{  $student->name }}</title>
     <style>
-        
-        @page { margin: 40px; }
-        body { font-family: "DejaVu Sans", sans-serif; direction: rtl; text-align: center; color: #222; background: #0fe204ff; }
-        .frame { border: 12px solid #2c3e50; padding: 30px; position: relative; background: #fff; }
-        .inner { border: 3px solid #2c3e50; padding: 40px 60px; }
-        h1.title { font-size: 36px; margin: 0 0 10px; letter-spacing: 1px; color: #2c3e50; }
-        .subtitle { font-size: 18px; color: #6c757d; margin-bottom: 25px; }
-        .recipient { font-size: 28px; font-weight: bold; margin: 20px 0; }
-        .course { font-size: 20px; margin: 6px 0 20px; }
-        .meta { font-size: 14px; color: #555; margin-top: 14px; }
-        .footer { display: flex; justify-content: space-between; align-items: center; margin-top: 35px; font-size: 14px; }
-        .sign { text-align: center; }
-        .seal { width: 110px; height: 110px; border: 3px dashed #2c3e50; border-radius: 50%;
-                display: inline-flex; align-items: center; justify-content: center; font-size: 14px; }
-        .qr { width: 110px; height: 110px; border: 2px solid #2c3e50; display: inline-block; position: relative; }
-        .qr::before, .qr::after { content: "vsvs"; position: absolute; background: #2c3e50; }
-        .qr::before { width: 24px; height: 24px; top: 8px; right: 8px; }
-        .qr::after  { width: 18px; height: 18px; bottom: 10px; left: 10px; }
-        .actions { margin: 24px 0 0; text-align: center; }
-        .btn { display:inline-block; padding:10px 16px; border-radius:8px; text-decoration:none; }
-        .btn-primary { background:#2c3e50; color:#fff; }
-        .btn-secondary { background:#6c757d; color:#fff; }
-       .sign::after { text-align: center; margin-bottom: 30px; }
-  
+        /* إعدادات مخصصة لمكتبة mPDF - هذا هو الجزء الأهم للتحميل */
+        @page {
+            margin: 0;
+            background-image: url("{{ public_path('image/qw2.jpeg') }}");
+            background-image-resize: 6; /* لتغطية الصفحة بالكامل */
+            background-repeat: no-repeat;
+            background-position: center;
+        }
 
+        body {
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+            font-family: 'sans-serif'; /* خط mPDF المدمج لدعم العربية */
+            text-align: center;
+            color: #1f2937;
+        }
 
+        .certificate-content {
+            width: 100%;
+            height: 100%;
+        }
+
+        .title {
+            color: #4338ca;
+            font-size: 45pt;
+            padding-top: 100pt; /* نفس الإزاحة في كود المعاينة */
+            font-weight: bold;
+        }
+
+        .recipient-section {
+            margin: 40pt 0;
+        }
+
+        .subtitle-text {
+            font-size: 22pt;
+            color: #4b5563;
+        }
+
+        .student-name {
+            font-size: 35pt;
+            color: #b91c1c;
+            font-weight: bold;
+            display: block;
+            margin-top: 10pt;
+            text-decoration: underline;
+        }
+
+        .course-info {
+            font-size: 20pt;
+            line-height: 1.6;
+            margin: 30pt 50pt;
+        }
+
+        .course-name {
+            color: #111827;
+            font-weight: bold;
+            font-size: 24pt;
+        }
+
+        .meta-data {
+            font-size: 13pt;
+            color: #6b7280;
+            margin-top: 20pt;
+        }
+
+        /* التذييل المنظم باستخدام الجداول (الأضمن في mPDF) */
+        .footer-table {
+            width: 90%;
+            margin: 50pt auto 0;
+            border-collapse: collapse;
+        }
+
+        .footer-cell {
+            width: 33.3%;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .signature-line {
+            border-top: 1.5pt solid #374151;
+            width: 140pt;
+            margin: 0 auto 5pt;
+        }
+
+        .manager-title {
+            font-weight: bold;
+            font-size: 15pt;
+        }
+
+        .seal-area img {
+            width: 90pt;
+            height: auto;
+        }
     </style>
 </head>
 <body>
 
+    <div class="certificate-content">
+        
+        <div class="title">شهادة إنجاز</div>
 
-<div class="frame">
-    <div class="inner">
-        <h1 class="title">Certificate of Achievement</h1>
-        <div class="subtitle">This certificate is awarded to</div>
-
-        <div class="recipient">{{ $student->name }}</div>
-
-        <div class="course">
-            For successfully completing the program <strong>{{ $student->course ?? '—' }}</strong>
+        <div class="recipient-section">
+            <span class="subtitle-text">تمنح هذه الشهادة تقديراً للجهود المتميزة لـ :</span>
+            <div class="student-name">{{ $student->name }}</div>
         </div>
 
-        <div class="meta">
-            Certificate No:  &nbsp;|&nbsp;
-            Issue Date: {{ \Illuminate\Support\Str::of($student->course_date)->isNotEmpty() ? \Carbon\Carbon::parse($student->course_date)->format('Y-m-d') : '—' }}
+        <div class="course-info">
+            لاجتيازه بنجاح البرنامج التدريبي المكثف بعنوان:<br>
+            <span class="course-name">" {{ $student->course ?? 'دورة تدريبية متقدمة' }} "</span><br>
+            والذي عُقد بتقدير عام بلغ <strong>{{ $student->degree }}%</strong>.
         </div>
 
-        <div class="footer">
-            <div class="sign">
-                <div class="oo"><strong>{{ auth()->user()->name ?? 'Tech Academy' }}</strong></div>
-                <div class="oo">General Manager</div>
-            </div>
-
-            <div class="seal"><img class="seal" src=" {{ asset('image/logono.png') }}" ></div>
-
-           
+        <div class="meta-data">
+            رقم الشهادة: {{ $student->id . str_pad($student->id, 5, '0', STR_PAD_LEFT) }} &nbsp; | &nbsp; 
+            تاريخ الإصدار: {{ $student->course_date ? \Carbon\Carbon::parse($student->course_date)->format('Y/m/d') : date('Y/m/d') }}م
         </div>
+
+        <table class="footer-table">
+            <tr>
+                <td class="footer-cell">
+                    <div class="signature-area">
+                        <div class="signature-line"></div>
+                        <div class="manager-title">{{ auth()->user()->name ?? 'مدير الأكاديمية' }}</div>
+                        <div style="font-size: 11pt;">المدير العام</div>
+                    </div>
+                </td>
+
+                <td class="footer-cell">
+                    <div class="seal-area">
+                        @if(isset($logoDataUri))
+                            {{-- في التحميل يفضل استخدام المسار المباشر أو Base64 --}}
+                            <img src="{{ $logoDataUri }}">
+                        @else
+                            <div style="border: 2pt dashed #ccc; width: 80pt; height: 80pt; border-radius: 50%; line-height: 80pt; margin: 0 auto; color: #ccc; font-size: 10pt;">الختم الرسمي</div>
+                        @endif
+                    </div>
+                </td>
+
+                <td class="footer-cell">
+                    <div style="font-size: 10pt; color: #6b7280;">
+                        يمكن التحقق من صحة الشهادة عبر<br> مسح رمز الاستجابة السريع (QR)
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
     </div>
-</div>
 
 </body>
+</html>

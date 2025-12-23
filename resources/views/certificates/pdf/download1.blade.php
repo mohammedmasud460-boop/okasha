@@ -1,178 +1,156 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8">
-    <title>شهادة إنجاز - {{ $student->name }}</title>
     <style>
-@page { margin: 40px; }
+        /* إعدادات مخصصة لمكتبة mPDF - هذا هو الجزء الأهم للتحميل */
+        @page {
+            margin: 0;
+            background-image: url("{{ public_path('image/qw1.jpeg') }}");
+            background-image-resize: 6; /* لتغطية الصفحة بالكامل */
+            background-repeat: no-repeat;
+            background-position: center;
+        }
 
-/* الخط والعرض العام */
-body {
-    font-family: "DejaVu Sans", sans-serif;
-    direction: rtl;
-    text-align: center;
-    color: #222;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* خلفية ناعمة */
-    padding: 20px;
-}
+        body {
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+            font-family: 'sans-serif'; /* خط mPDF المدمج لدعم العربية */
+            text-align: center;
+            color: #1f2937;
+        }
 
-/* إطار الشهادة */
-.frame {
-    border: 10px solid #2c3e50;
-    border-radius: 12px;
-    padding: 30px;
-    position: relative;
-    background: #ff0202ff;
-    box-shadow: 0 0 20px rgba(0,0,0,0.15); /* ظل أنيق */
-}
-.inner {
-    border: 3px dashed #2c3e50;
-    border-radius: 8px;
-    padding: 40px 60px;
-    background: #00d5ffff;
-}
+        .certificate-content {
+            width: 100%;
+            height: 100%;
+        }
 
-/* العناوين */
-h1.title {
-    font-size: 40px;
-    margin: 0 0 15px;
-    color: #2c3e50;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-.subtitle {
-    font-size: 20px;
-    color: #6c757d;
-    margin-bottom: 25px;
-    font-style: italic;
-}
-.recipient {
-    font-size: 32px;
-    font-weight: bold;
-    margin: 20px 0;
-    color: #007bff;
-}
-.course {
-    font-size: 22px;
-    margin: 10px 0 20px;
-    color: #343a40;
-}
-.meta {
-    font-size: 16px;
-    color: #555;
-    margin-top: 14px;
-}
+        .title {
+            color: #4338ca;
+            font-size: 45pt;
+            padding-top: 100pt; /* نفس الإزاحة في كود المعاينة */
+            font-weight: bold;
+        }
 
-/* تذييل الشهادة */
-.footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 35px;
-    font-size: 14px;
-}
-.sign {
-    text-align: center;
-    font-weight: bold;
-    color: #2c3e50;
-}
+        .recipient-section {
+            margin: 40pt 0;
+        }
 
-/* ختم دائري بدون صورة */
-.seal {
-    width: 120px;
-    height: 120px;
-    border: 4px dashed #007bff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: bold;
-    color: #007bff;
-    background: #f8f9fa;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-}
+        .subtitle-text {
+            font-size: 22pt;
+            color: #4b5563;
+        }
 
-/* مربع QR تجريبي */
-.qr {
-    width: 120px;
-    height: 120px;
-    border: 3px solid #2c3e50;
-    display: inline-block;
-    position: relative;
-    background: repeating-linear-gradient(45deg, #2c3e50, #2c3e50 10px, #fff 10px, #fff 20px);
-}
+        .student-name {
+            font-size: 35pt;
+            color: #b91c1c;
+            font-weight: bold;
+            display: block;
+            margin-top: 10pt;
+            text-decoration: underline;
+        }
 
-/* أزرار العرض */
-.actions {
-    margin: 24px 0;
-    text-align: center;
-}
-.btn {
-    display:inline-block;
-    padding:10px 16px;
-    border-radius: border-radius:8px;
-    text-decoration:none;
-    font-weight: bold;
-}
-.btn-primary {
-    background:#2c3e50;
-    color:#fff;
-}
-.btn-secondary {
-    background:#6c757d;
-    color:#fff;
-}
+        .course-info {
+            font-size: 20pt;
+            line-height: 1.6;
+            margin: 30pt 50pt;
+        }
+
+        .course-name {
+            color: #111827;
+            font-weight: bold;
+            font-size: 24pt;
+        }
+
+        .meta-data {
+            font-size: 13pt;
+            color: #6b7280;
+            margin-top: 20pt;
+        }
+
+        /* التذييل المنظم باستخدام الجداول (الأضمن في mPDF) */
+        .footer-table {
+            width: 90%;
+            margin: 50pt auto 0;
+            border-collapse: collapse;
+        }
+
+        .footer-cell {
+            width: 33.3%;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .signature-line {
+            border-top: 1.5pt solid #374151;
+            width: 140pt;
+            margin: 0 auto 5pt;
+        }
+
+        .manager-title {
+            font-weight: bold;
+            font-size: 15pt;
+        }
+
+        .seal-area img {
+            width: 90pt;
+            height: auto;
+        }
     </style>
 </head>
 <body>
 
-    <!-- أزرار العرض (ستُخفى عادة عند التوليد) -->
+    <div class="certificate-content">
+        
+        <div class="title">شهادة إنجاز</div>
 
-    <div class="frame">
-        <div class="inner">
-            <h1 class="title">Certificate of Achievement</h1>
-            <div class="subtitle">This certificate is awarded to</div>
-
-            <div class="recipient">{{ $student->name }}</div>
-
-            <div class="course">
-                For successfully completing the program <strong>{{ $student->course ?? '—' }}</strong>
-            </div>
-
-            <div class="meta">
-                Certificate No: {{ $student->counter ?? '—' }} &nbsp;|&nbsp;
-                Issue Date:
-                {{ \Illuminate\Support\Str::of($student->course_date)->isNotEmpty()
-                    ? \Carbon\Carbon::parse($student->course_date)->format('Y-m-d')
-                    : '—' }}
-            </div>
-
-            <div class="footer">
-                <!-- التوقيع -->
-                <div class="sign">
-                    <div class="oo"><strong>{{ auth()->user()->name ?? 'Tech Academy' }}</strong></div>
-                    <div class="oo">General Manager</div>
-                </div>
-
-                <!-- دمج الكود المأخوذ من الصورتين: نعرض الشعار داخل .card -->
-                <div class="card">
-                    <!-- الختم داخل الكارد -->
-                    <div class="seal">
-                        @isset($logoDataUri)
-                            {{ $logoDataUri }}
-                        @else
-                            <!--Fallback عند غياب الشعار-->
-                            <span>Official Seal</span>
-                        @endisset
-                    </div>
-                </div>
-
-                <!-- مربع QR تجريبي -->
-                <div class="qr"></div>
-            </div>
+        <div class="recipient-section">
+            <span class="subtitle-text">تمنح هذه الشهادة تقديراً للجهود المتميزة لـ :</span>
+            <div class="student-name">{{ $student->name }}</div>
         </div>
+
+        <div class="course-info">
+            لاجتيازه بنجاح البرنامج التدريبي المكثف بعنوان:<br>
+            <span class="course-name">" {{ $student->course ?? 'دورة تدريبية متقدمة' }} "</span><br>
+            والذي عُقد بتقدير عام بلغ <strong>{{ $student->degree }}%</strong>.
+        </div>
+
+        <div class="meta-data">
+            رقم الشهادة: {{ $student->id . str_pad($student->id, 5, '0', STR_PAD_LEFT) }} &nbsp; | &nbsp; 
+            تاريخ الإصدار: {{ $student->course_date ? \Carbon\Carbon::parse($student->course_date)->format('Y/m/d') : date('Y/m/d') }}م
+        </div>
+
+        <table class="footer-table">
+            <tr>
+                <td class="footer-cell">
+                    <div class="signature-area">
+                        <div class="signature-line"></div>
+                        <div class="manager-title">{{ auth()->user()->name ?? 'مدير الأكاديمية' }}</div>
+                        <div style="font-size: 11pt;">المدير العام</div>
+                    </div>
+                </td>
+
+                <td class="footer-cell">
+                    <div class="seal-area">
+                        @if(isset($logoDataUri))
+                            {{-- في التحميل يفضل استخدام المسار المباشر أو Base64 --}}
+                            <img src="{{ $logoDataUri }}">
+                        @else
+                            <div style="border: 2pt dashed #ccc; width: 80pt; height: 80pt; border-radius: 50%; line-height: 80pt; margin: 0 auto; color: #ccc; font-size: 10pt;">الختم الرسمي</div>
+                        @endif
+                    </div>
+                </td>
+
+                <td class="footer-cell">
+                    <div style="font-size: 10pt; color: #6b7280;">
+                        يمكن التحقق من صحة الشهادة عبر<br> مسح رمز الاستجابة السريع (QR)
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
     </div>
 
 </body>
+</html>

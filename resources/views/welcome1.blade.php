@@ -16,8 +16,8 @@
         .header{
             min-height: 100vh;
             width: 100%;
-            background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)), url("{{asset('image/name.webp')}}");
-            background-position: center;
+  background-image: linear-gradient(to bottom right, #ffffffff, #bed2d3ff);
+              background-position: center;
             background-size: cover;
             position: relative;
         }
@@ -27,9 +27,10 @@
             padding: 2% 6%;
             justify-content: space-between;
             align-items: center;
-
+  background: rgba(8, 234, 255, 0.92);
+            backdrop-filter: blur(5px);
         }
-         nav img{
+         img{
             width: 150px;
          }
          .nav-links{
@@ -150,22 +151,23 @@ nav img{
 <body>
     <section class="header">
         <nav>
-          <a href="#"><img src="{{asset('image/logono.png')}}" alt="logo"></a>
+          
             <div class="nav-links" id="navLinks">
                 <i class="bxl bx-instagram" onclick="hideMenu()"></i>
                 <ul>
-                    <li class="name1"><a href="#" >الصفحة الرئيسية</a></li>
+                    <li class="name1"><a href="{{ route('welcome1') }}">الصفحة الرئيسية</a></li>
                     <li class="name2"><a href="{{ route('register') }}">الجهات التعليمية</a></li>
                     <li class="name2"><a href="{{ route('services') }}">خدماتنا</a></li>
-                    <li class="name2" ><a href="conecte">الاسئلة الشائعة</a></li>
+                    <li class="name2" ><a href="conecte">تواصل معنا</a></li>
                     <li class="name2"><a href="{{ route('about') }}">من نحن</a></li>
                     
                 </ul>
             </div>
-            <i class="bxl bx-instagram"onclick="showMenu()">cc</i>
+            <i class="bxl bx-instagram"onclick="showMenu()"></i>
         </nav>
         <div class="text-box">
-            <h1>مرحبا بكم في منصة شهادتي</h1>
+            <a href="#"><img src="{{asset('image/logono.png')}}" alt="logo"></a>
+            <h1> منصة شهادتي</h1>
             <p>منصة شهادتي هي منصة الكترونية تهدف الى تسهيل عملية اصدار الشهادات التعليمية والاكاديمية بأكثر من قالب</p>
             <a href="{{ route('register') }}" class="hero-btn">انضم الينا</a>
 

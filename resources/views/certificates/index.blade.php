@@ -1,25 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>معرض القوالب - {{ $student->name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        .template-card { transition: transform 0.3s; border: none; border-radius: 15px; overflow: hidden; }
+        .template-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card-title { color: #4338ca; font-weight: bold; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>قائمة الشهادات</h1>
-        <ul>
-            @foreach($students as $student)
-                <li>
-                
-                    <a href="{{ route('certificate.show1', ['student' => $student->id]) }}">عرض شهادة 1</a> |
-            
-                    <a href="{{ route('certificate.show2', ['student' => $student->id]) }}">عرض شهادة 2</a> |
-                
-                    <a href="{{ route('certificate.show3', ['student' => $student->id]) }}">عرض شهادة 3</a> |
-                
-                </li>
-            @endforeach
-        </ul>
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h1 class="fw-bold">اختر قالب الشهادة</h1>
+            <p class="text-muted">إصدار شهادة للطالب: <span class="badge bg-primary fs-6">{{ $student->name }}</span></p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="card h-100 template-card shadow-sm">
+                    <img src="{{ asset('image/qw1.jpeg') }}" class="card-img-top" alt="القالب الكلاسيكي">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">القالب الكلاسيكي</h5>
+                        <p class="card-text text-muted small">يتميز بزخارف رسمية وخلفية تقليدية.</p>
+                        <div class="d-grid gap-2">
+                            <a href="{{ route('certificate.show1', $student->id) }}" class="btn btn-outline-primary">معاينة القالب</a>
+                            <a href="{{ route('pdf.download1', $student->id) }}" class="btn btn-primary">تحميل PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 template-card shadow-sm">
+                    <img src="{{ asset('image/qw2.jpeg') }}" class="card-img-top" alt="القالب العصري">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">القالب العصري</h5>
+                        <p class="card-text text-muted small">تصميم بسيط وألوان هادئة للشركات الناشئة.</p>
+                        <div class="d-grid gap-2">
+                            <a href="{{ route('certificate.show2', $student->id) }}" class="btn btn-outline-primary">معاينة القالب</a>
+                            <a href="{{ route('pdf.download2', $student->id) }}" class="btn btn-primary">تحميل PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 template-card shadow-sm">
+                    <img src="{{ asset('image/qw3.jpeg') }}" class="card-img-top" alt="القالب الذهبي">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">القالب الذهبي</h5>
+                        <p class="card-text text-muted small">تصميم فاخر مخصص للمناسبات الخاصة والجوائز.</p>
+                        <div class="d-grid gap-2">
+                            <a href="{{ route('certificate.show3', $student->id) }}" class="btn btn-outline-primary">معاينة القالب</a>
+                            <a href="{{ route('pdf.download3', $student->id) }}" class="btn btn-primary">تحميل PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="text-center mt-5">
+            <a href="/dashboard" class="btn btn-link text-decoration-none">← العودة للوحة التحكم</a>
+        </div>
+    </div>
 </body>
 </html>

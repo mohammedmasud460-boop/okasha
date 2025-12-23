@@ -1,12 +1,13 @@
 <?php
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProfileController;
+use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CertificateController;
 // عرض الصفحات 
 Route::get('/', function () {
     return view('welcome1');
-});
+})->name('welcome1');
 Route::get('/services',function (){
 return view('services');
 })->name('services');
@@ -61,25 +62,20 @@ Route::get('/students', [StudentController::class, 'create'])->name('students.cr
  Route::delete('/dashboard/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
 });
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    // معرض القوالب للطالب المختار
+    Route::get('/certificates/gallery/{student}', [CertificateController::class, 'index'])->name('certificates.index');
 
-Route::get('/certificates', [CertificateController::class, 'index'])->name('certificates.index');
+    // عرض القوالب (المعاينة)
+    Route::get('/certificates/show1/{student}', [CertificateController::class, 'show1'])->name('certificate.show1');
+    Route::get('/certificates/show2/{student}', [CertificateController::class, 'show2'])->name('certificate.show2');
+    Route::get('/certificates/show3/{student}', [CertificateController::class, 'show3'])->name('certificate.show3');
 
+    // تحميل الـ PDF (باستخدام mPDF لجميع القوالب لضمان الجودة)
+    Route::get('/certificates/download1/{student}', [CertificateController::class, 'download1'])->name('pdf.download1');
+    Route::get('/certificates/download2/{student}', [CertificateController::class, 'download2'])->name('pdf.download2');
+    Route::get('/certificates/download3/{student}', [CertificateController::class, 'download3'])->name('pdf.download3');
+});
 
-
-Route::get('certificates/certificate1/{student}', [CertificateController::class, 'show1'])->name('certificate.show1');
-Route::get('certificates/certificate1/download/{student}', [CertificateController::class, 'download1'])->name('pdf.download1');
-
-Route::get('certificates/certificate2/{student}', [CertificateController::class, 'show2'])->name('certificate.show2');
-Route::get('certificates/certificate2/download/{student}', [CertificateController::class, 'download2'])->name('pdf.download2');
-
-Route::get('certificates/certificate3/{student}', [CertificateController::class, 'show3'])->name('certificate.show3');
-Route::get('certificates/certificate3/download/{student}', [CertificateController::class, 'download3'])->name('pdf.download3');
-
-Route::get('home',[CertificateController::class,'download1'])->name('home');
-
-
-
-Route::get('/certificate/image', [CertificateController::class, 'imge'])
-    ->name('certificate.image');
 
 require __DIR__.'/auth.php';
