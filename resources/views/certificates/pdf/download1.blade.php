@@ -3,14 +3,11 @@
 <head>
     <meta charset="utf-8">
     <style>
-        /* إعدادات مخصصة لمكتبة mPDF - هذا هو الجزء الأهم للتحميل */
-        @page {
-            margin: 0;
-            background-image: url("{{ public_path('image/qw1.jpeg') }}");
-            background-image-resize: 6; /* لتغطية الصفحة بالكامل */
-            background-repeat: no-repeat;
-            background-position: center;
-        }
+     @page {
+        margin: 0;
+        background-image: url("{{ $backgroundImage }}");
+        background-image-resize: 6;
+    }
 
         body {
             margin: 0;
