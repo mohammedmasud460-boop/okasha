@@ -1,103 +1,195 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>إنشاء حساب جديد</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب جديد</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", "Tahoma", sans-serif;
+        }
 
-  <!-- CSS داخلي بسيط -->
-  <style>
-    :root{
-      --bg:#f7f7fb;
-      --card:#ffffff;
-      --text:#1f2937;
-      --muted:#6b7280;
-      --primary:#4f46e5;
-      --primary-dark:#4338ca;
-      --danger:#dc2626;
-      --border:#e5e7eb;
-      --ring:#c7d2fe;
-    }
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:"Tahoma","Segoe UI",system-ui,Arial,sans-serif;line-height:1.6;}
-    .container{max-width:720px;margin:40px auto;padding:0 16px;}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.06);padding:24px;}
-    h1{margin:0 0 8px;font-size:22px;}
-    .subtitle{color:var(--muted);font-size:14px;margin-bottom:16px;}
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+          
+            /* استخدام نفس الخلفية لتوحيد هوية النظام */
+            background: url("{{ asset('image/home.jpg') }}") no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
-    .field{margin-bottom:16px;}
-    .label{display:block;margin-bottom:6px;font-size:14px;color:#374151;}
-    .input{
-      width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;
-      font-size:14px;background:white;color:var(--text);
-      transition:border-color .15s,box-shadow .15s;
-    }
-    .input:focus{
-      outline:none;border-color:var(--primary);
-      box-shadow:0 0 0 4px var(--ring);
-    }
-    .error{margin-top:6px;color:var(--danger);font-size:12px;}
-    .row{display:flex;gap:12px;flex-wrap:wrap;}
-    .row .field{flex:1 1 240px;}
+        .wrapper {
+            width: 500px; /* عرض أكبر قليلاً لاستيعاب حقول كلمة المرور بجانب بعضها */
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, .2);
+            backdrop-filter: blur(9px);
+            color: #fff;
+            border-radius: 12px;
+            padding: 30px 40px;
+            margin: 20px;
+        }
 
-    .actions{display:flex;align-items:center;justify-content:space-between;margin-top:20px;gap:12px;flex-wrap:wrap;}
-    .link{color:#374151;text-decoration:underline;font-size:13px;}
-    .btn{
-      appearance:none;border:none;border-radius:10px;background:var(--primary);
-      color:white;padding:10px 16px;font-size:14px;cursor:pointer;
-      transition: background .15s, transform .05s;
-    }
-    .btn:hover{background:var(--primary-dark);}
-    .btn:active{transform:scale(.99);}
-    .note{margin-top:10px;color:var(--muted);font-size:12px;}
-  </style>
+        .wrapper h1 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .wrapper .input-box {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            margin: 25px 0;
+        }
+
+        .input-box input {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            border: 2px solid rgba(255, 255, 255, .2);
+            border-radius: 40px;
+            font-size: 16px;
+            color: #fff;
+            padding: 0 45px 0 20px; /* تنسيق RTL: الأيقونة على اليمين */
+        }
+
+        .input-box input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .input-box i {
+            position: absolute;
+            right: 20px; /* وضع الأيقونة في جهة اليمين للغة العربية */
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+        }
+
+        /* تنسيق الحقول المزدوجة (كلمة المرور) */
+        .input-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .input-row .input-box {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            font-size: 11px;
+            margin-top: -20px;
+            margin-bottom: 10px;
+            padding-right: 15px;
+        }
+
+        .wrapper .btn {
+            width: 100%;
+            height: 45px;
+            background: #fff;
+            border: none;
+            outline: none;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .wrapper .btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.02);
+        }
+
+        .register-link {
+            font-size: 14.5px;
+            text-align: center;
+            margin: 20px 0 10px;
+        }
+
+        .register-link p a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-link p a:hover {
+            text-decoration: underline;
+        }
+
+        .note {
+            font-size: 11px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <h1>إنشاء حساب جديد</h1>
-      <div class="subtitle">أدخل بيانات الجهة لإنشاء حساب جديد.</div>
 
-      <form method="POST" action="{{ route('register') }}">
-        @csrf
+    <div class="wrapper">
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
+            
+            <h1>إنشاء حساب</h1>
+            <p class="subtitle">أدخل بيانات الجهة لإنشاء حساب جديد</p>
 
-        <!-- الاسم -->
-        <div class="field">
-          <label class="label" for="name">اسم الجهة</label>
-          <input id="name" type="text" name="name" class="input" value="{{ old('name') }}" required autocomplete="name" autofocus>
-          @error('name') <div class="error">{{ $message }}</div> @enderror
-        </div>
+            <div class="input-box">
+                <input type="text" name="name" placeholder="اسم الجهة التعليمية" value="{{ old('name') }}" required autofocus>
+                <i class='bx bxs-institution'></i>
+            </div>
+            @error('name') <div class="error-message">{{ $message }}</div> @enderror
 
-        <!-- البريد الإلكتروني -->
-        <div class="field">
-          <label class="label" for="email">البريد الإلكتروني</label>
-          <input id="email" type="email" name="email" class="input" value="{{ old('email') }}" required autocomplete="username">
-          @error('email') <div class="error">{{ $message }}</div> @enderror
-        </div>
+            <div class="input-box">
+                <input type="email" name="email" placeholder="البريد الإلكتروني" value="{{ old('email') }}" required>
+                <i class='bx bxs-envelope'></i>
+            </div>
+            @error('email') <div class="error-message">{{ $message }}</div> @enderror
 
-        <!-- كلمة المرور + تأكيد -->
-        <div class="row">
-          <div class="field">
-            <label class="label" for="password">كلمة المرور</label>
-            <input id="password" type="password" name="password" class="input" required autocomplete="new-password">
-            @error('password') <div class="error">{{ $message }}</div> @enderror
-          </div>
+            <div class="input-row">
+                <div class="input-box">
+                    <input type="password" name="password" placeholder="كلمة المرور" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="password_confirmation" placeholder="تأكيد الكلمة" required>
+                    <i class='bx bxs-check-shield'></i>
+                </div>
+            </div>
+            @error('password') <div class="error-message">{{ $message }}</div> @enderror
 
-          <div class="field">
-            <label class="label" for="password_confirmation">تأكيد كلمة المرور</label>
-            <input id="password_confirmation" type="password" name="password_confirmation" class="input" required autocomplete="new-password">
-            @error('password_confirmation') <div class="error">{{ $message }}</div> @enderror
-          </div>
-        </div>
+            <button type="submit" class="btn">تسجيل الحساب</button>
 
-        <div class="actions">
-          <a href="{{ route('login') }}" class="link">لديك حساب بالفعل؟ سجّل الدخول</a>
-          <button type="submit" class="btn">تسجيل</button>
-        </div>
+            <div class="register-link">
+                <p>لديك حساب بالفعل؟ <a href="{{ route('login') }}">سجل الدخول</a></p>
+            </div>
 
-        <div class="note">بالنقر على "تسجيل"، فإنك توافق على سياسات المنصة.</div>
-      </form>
+            <p class="note">بالنقر على "تسجيل"، فإنك توافق على سياسات المنصة.</p>
+        </form>
     </div>
-  </div>
+
 </body>
 </html>
