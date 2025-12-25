@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8">
+    
     <style>
         /* إعدادات مخصصة لمكتبة mPDF - هذا هو الجزء الأهم للتحميل */
            @page {

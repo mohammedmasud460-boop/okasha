@@ -1,290 +1,307 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-   <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
-   <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
- 
-    <title>Document</title>
-</head>
-<body>
+    <title>خدماتنا - شهادتي</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+ <link rel="shortcut icon" href="{{asset('image/logono.png')}}" type="image/x-icon">
     <style>
-        
-        *{
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #14e3faff;
+            --border: rgba(255, 255, 255, 0.3);
+            --glass-bg: rgba(255, 255, 255, 0.4);
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            
-        }
-        .header{
-            min-height: 100vh;
-            width: 100%;
-            background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)), url("{{asset('image/name.webp')}}");
-            background-position: center;
-            background-size: cover;
-            position: relative;
+            box-sizing: border-box;
         }
 
-        nav{
+        body {
+            background-image: linear-gradient(to top right, #5ce7f6ff, #ffffffff);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        /* --- الهيدر --- */
+        nav {
             display: flex;
-            padding: 2% 6%;
+            padding: 10px 5%;
             justify-content: space-between;
             align-items: center;
-
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-         nav img{
-            width: 150px;
-         }
-         .nav-links{
-            flex: 1;
+
+        nav img { width: clamp(80px, 10vw, 120px); }
+
+        .nav-links ul { 
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links ul li { padding: 5px 15px; }
+
+        .nav-links ul li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-links ul li a:hover { color: var(--primary); }
+
+        /* أيقونة القائمة للجوال */
+        .menu-icon {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* --- القائمة الجانبية للجوال --- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%; /* مخفية في البداية */
+            width: 250px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+            transition: 0.4s ease-in-out;
+            padding: 20px;
+            border-left: 1px solid var(--border);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        }
+
+        .sidebar.active {
+            right: 0; /* تظهر عند التفعيل */
+        }
+
+        .sidebar .close-icon {
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--primary);
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            color: var(--primary);
+            padding-right: 10px;
+        }
+
+        /* الطبقة الشفافة خلف القائمة */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 1500;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* --- المحتوى --- */
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
             text-align: center;
-         }
-            .nav-links ul li{
-                list-style: none;
-                display: inline-block;
-                padding: 8px 30px;
-                position: relative;
-                margin-bottom: 15px;
-            }
-            .nav-links ul{
-                justify-content: center;
-            }
-            .nav-links ul li a{
-                color: #fff;
-                text-decoration: none;
-                font-size: 18px;
-                font-weight: bold;
-            }
-            .text-box{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            text-align: center;
-            color: #fff;
+        }
 
-            }
-            .text-box h1{
-                font-size: 50px;
-                margin-bottom: 20px;
-            }
+        .heading {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #1f2937;
+        }
 
-            .text-box p{
-                font-size: 20px;
-                margin-bottom: 30px;
-            }   
-            .hero-btn{
-                display: inline-block;
-                text-decoration: none;
-                color: #fff;
-                border: 2px solid #fff;
-                padding: 10px 30px;
-                font-size: 18px;
-                border-radius: 25px;
-                transition: all 0.3s ease;
-            }
-            .hero-btn{
-                background-color: #14e3faff;
-                color: #ffffffff;
-            }
-            .name1{
-              border: 2px solid #fff;
-                border-radius: 15px;
-                transition: all 0.3s ease;
-    
-}
+        .heading span { color: var(--primary); }
 
-.name1:hover{
-   background-color: #14e3faff;
-                color: #000;
+        .serves-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
 
-}
-.name2:hover{
-      border: 2px solid #fff;
-                border-radius: 15px;
-                transition: all 0.3s ease;
-   background-color: #14e3faff;
-                color: #000;
+        .services-box {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: 0.4s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-}
-nav .bxl{
-    display: none;
-}
-@media (max-width: 700px){
-    .text-box h1{
-        font-size: 30px;
-    }
-    .text-box p{
-        font-size: 16px;
-    }
-    .nav-links ul li{
-        display: block;
-    }
-    .nav-links{
-        position: absolute;
-        background: #000;
-        height: 100vh;
-        width: 200px;
-        top: 0;
-        left: -200px;
-        text-align: right;
-        transition: 2s all ease;
-        z-index: 2;
-    }
-    nav .bxl{
-    display: block;
-    color: #fff;
-    font-size: 30px;
-    cursor: pointer;
+        .services-box:hover {
+            transform: translateY(-10px);
+            background: white;
+            border-color: var(--primary);
+        }
 
-}
-    .nav-links ul{
-        padding:15px ;
-}
+        .services-box i {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
 
-nav img{
-    width: 120px;
+        .services-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #1f2937;
+        }
 
-}
-}
-.sub-header{
-    height: 40vh;
-    width: 100%;
-    background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)), url("{{asset('image/name.webp')}}");
-    background-position: center;
-    background-size: cover;
-    text-align: center;
-    color: #fff;
-}
-:root{
-    --primarycolor:#ff2746;
-    --secondarycolor:#f34b7d;
-    --Lightcolor:#ffffff;
-    --bgcolor-1:#171a1c;
-    --bgcolor-2:#22282a;
-   --padding: 8%;
+        .services-box p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
 
-}
-:root{
-    --bg-color:#1f242d;
-    --second-bg-color:#323946;
-    --text-color:#fff;
-    --main-color:#0ef;
-}
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
 
+        .btn:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+        }
 
-
-.Services  h2{
-margin-bottom: 5rem;
-}
-.Services{background-image: url(back4.jpg);
-background-repeat: no-repeat;
-background-size: cover;}
-
-.serves-content{
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap:2rem;
-}
-.serves-content  .services-box{
-    flex: 1 1 10rem;
-    background: var(--second-bg-color);
-    padding: 3rem 2rem 4rem;
-    border-radius: 1rem ;
-    text-align: center;
-    border: 2px solid var(--bgcolor-2);
-    margin-top: 2rem;
-    transition: 5s ease;
-}
-.serves-content  .services-box:hover{
-    border-color: var(--primarycolor);
-    transform: scale(1.02);
-}
-.services-box i{
-    font-size: 7rem;
-    color: var(--Lightcolor);
-    margin-top: 50px;
-}
-.services-box h3{
-    font-size: 2.6rem;
-}
-.services-box p{
-    font-size: 1.6rem;
-    margin: 1rem 0 3rem;
-   margin-bottom: 50px;
-}
-
-
+        /* --- ميزات الجوال (Media Queries) --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* إخفاء الروابط العادية */
+            .menu-icon { display: block; } /* إظهار أيقونة المنيو */
+            .heading { font-size: 1.8rem; margin-bottom: 25px; }
+            .container { margin: 30px auto; }
+            .services-box { padding: 30px 20px; }
+        }
     </style>
-    <section class="sub-header">
-        <nav>
-          <a href="#"><img src="{{asset('image/logono.png')}}" alt="logo"></a>
-            <div class="nav-links" id="navLinks">
-                <i class="bxl bx-instagram" onclick="hideMenu()"></i>
-              <ul>
-                    <li class="name1"><a href="#" >الصفحة الرئيسية</a></li>
-                    <li class="name2"><a href="{{ route('register') }}">الجهات التعليمية</a></li>
-                    <li class="name2"><a href="#">خدماتنا</a></li>
-                    <li class="name2" ><a href="{{ route('conecte') }}">الاسئلة الشائعة</a></li>
-                    <li class="name2"><a href="{{ route('about') }}">من نحن</a></li>
-                    
-                </ul>
-            </div>
-            <i class="bxl bx-instagram"onclick="showMenu()">cc</i>
-        </nav>
-          <h2 class="heading">Our <span>Services</span></h2>
-    </section>
+</head>
+<body>
 
-    <script>
-        var navLinks = document.getElementById("navLinks")
+<div class="overlay" id="overlay"></div>
 
-        function showMenu(){
-            navLinks.style.left = "0";
-        }
-             function hideMenu(){
-            navLinks.style.left = "-200px";
-        }
-        </script>
-  
+<div class="sidebar" id="sidebar">
+    <i class='bx bx-x close-icon' id="closeMenu"></i>
+    <ul>
+        <li><a href="{{ route('welcome1') }}">الرئيسية</a></li>
+        <li><a href="{{ route('register') }}">الجهات التعليمية</a></li>
+        <li><a href="{{ route('services') }}">خدماتنا</a></li>
+        <li><a href="{{ route('conecte') }}">تواصل معنا</a></li>
+        <li><a href="{{ route('about') }}">من نحن</a></li>
+    </ul>
+</div>
 
+<nav>
+    <a href="#"><img src="{{asset('image/logono.png')}}" alt="logo"></a>
+    
+    <div class="nav-links">
+        <ul>
+            <li><a href="{{ route('welcome1') }}">الرئيسية</a></li>
+            <li><a href="{{ route('register') }}">الجهات التعليمية</a></li>
+            <li><a href="{{ route('services') }}">خدماتنا</a></li>
+            <li><a href="{{ route('conecte') }}">تواصل معنا</a></li>
+            <li><a href="{{ route('about') }}">من نحن</a></li>
+        </ul>
+    </div>
 
+    <i class='bx bx-menu menu-icon' id="openMenu"></i>
+</nav>
+
+<div class="container">
+    <h2 class="heading">خدماتنا <span>الذكية</span></h2>
 
     <div class="serves-content">
         <div class="services-box">
-            <i class='bxr  bx-code'  ></i> 
-            <h3>Wed Development</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing 
-                elit. Sed delectus odit iste consequuntur eaque nobis sit? Accusantium, quas
-                i harum! Nobis eum autem maiores id. Necessitatibus, quisquam fugit. Adipisci, reiciendis dignissimos.</p>
-                       <a href="#" class="btn">Read More</a>
-            </div>
+            <i class='bx bx-certification'></i> 
+            <h3>إصدار الشهادات</h3>
+            <p>نظام ذكي يتيح للجهات التعليمية إصدار شهادات احترافية للمستفيدين بضغطة زر واحدة مع نماذج متعددة وجذابة.</p>
+            <a href="#" class="btn">اكتشف المزيد</a>
+        </div>
 
+        <div class="services-box">
+            <i class='bx bx-user-check'></i> 
+            <h3>إدارة المستفيدين</h3>
+            <p>نظم بيانات طلابك ومستفيديك بسهولة، تابع درجاتهم، وحدث بياناتهم من خلال لوحة تحكم عصرية وبسيطة.</p>
+            <a href="#" class="btn">اكتشف المزيد</a>
+        </div>
 
-             <div class="services-box">
-            <i class='bxr  bx-pencil-sparkles'  ></i> 
-            <h3>Graphic Design</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing 
-                elit. Sed delectus odit iste consequuntur eaque nobis sit? Accusantium, quas
-                i harum! Nobis eum autem maiores id. 
-                Necessitatibus, quisquam fugit. Adipisci, reiciendis dignissimos.</p>
-                       <a href="#" class="btn">Read More</a>
-            </div>
-
-
-             <div class="services-box">
-            <i class='bxr  bx-network-chart'  ></i> 
-            <h3>Digital Marketing</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing 
-                elit. Sed delectus odit iste consequuntur eaque nobis sit? Accusantium, quas
-                i harum! Nobis eum autem maiores id. Necessitatibus, quisquam fugit. Adipisci, reiciendis dignissimos.</p>
-                       <a href="#" class="btn">Read More</a>
-            </div>
+        <div class="services-box">
+            <i class='bx bx-shield-quarter'></i> 
+            <h3>أمان البيانات</h3>
+            <p>نولي حماية بيانات جهتك التعليمية أولوية قصوى، مع تشفير كامل لكافة السجلات والملفات المرفوعة على المنصة.</p>
+            <a href="#" class="btn">اكتشف المزيد</a>
+        </div>
     </div>
+</div>
 
-    
+<script>
+    const openMenu = document.getElementById('openMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    // فتح القائمة
+    openMenu.addEventListener('click', () => {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+    });
+
+    // إغلاق القائمة
+    const closeFunc = () => {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    };
+
+    closeMenu.addEventListener('click', closeFunc);
+    overlay.addEventListener('click', closeFunc);
+</script>
+
 </body>
 </html>

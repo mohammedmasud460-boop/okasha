@@ -7,83 +7,90 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
     <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --danger: #dc2626;
+            --border: #e5e7eb;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Poppins", "Tahoma", sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
+            /* استعارة الخلفية المتدرجة من الكود الثاني */
+            background-image: linear-gradient(to top right, #5ce7f6ff, #ffffffff);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-          
-            /* استخدام نفس الخلفية لتوحيد هوية النظام */
-            background: url("{{ asset('image/home.jpg') }}") no-repeat;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            margin: 0;
         }
 
         .wrapper {
-            width: 500px; /* عرض أكبر قليلاً لاستيعاب حقول كلمة المرور بجانب بعضها */
-            background: transparent;
-            border: 2px solid rgba(255, 255, 255, .2);
-            backdrop-filter: blur(9px);
-            color: #fff;
-            border-radius: 12px;
-            padding: 30px 40px;
-            margin: 20px;
+            width: clamp(320px, 90vw, 500px);
+            /* تأثير زجاجي (Glassmorphism) يتناسب مع الهوية الجديدة */
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            color: #1f2937;
         }
 
         .wrapper h1 {
-            font-size: 32px;
+            font-size: 26px;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            color: var(--primary);
         }
 
         .subtitle {
             text-align: center;
             font-size: 14px;
-            margin-bottom: 20px;
-            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+            color: #6b7280;
         }
 
         .wrapper .input-box {
             position: relative;
             width: 100%;
             height: 50px;
-            margin: 25px 0;
+            margin: 20px 0;
         }
 
         .input-box input {
             width: 100%;
             height: 100%;
-            background: transparent;
-            border: none;
+            background: #fff;
+            border: 1px solid var(--border);
             outline: none;
-            border: 2px solid rgba(255, 255, 255, .2);
-            border-radius: 40px;
-            font-size: 16px;
-            color: #fff;
-            padding: 0 45px 0 20px; /* تنسيق RTL: الأيقونة على اليمين */
+            border-radius: 12px;
+            font-size: 14px;
+            color: #333;
+            padding: 0 45px 0 15px; /* RTL: الأيقونة يمين */
+            transition: all 0.3s ease;
         }
 
-        .input-box input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+        .input-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
         }
 
         .input-box i {
             position: absolute;
-            right: 20px; /* وضع الأيقونة في جهة اليمين للغة العربية */
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
             font-size: 20px;
+            color: var(--primary);
         }
 
-        /* تنسيق الحقول المزدوجة (كلمة المرور) */
         .input-row {
             display: flex;
             gap: 15px;
@@ -96,44 +103,46 @@
         }
 
         .error-message {
-            color: #ff4d4d;
-            font-size: 11px;
-            margin-top: -20px;
+            color: var(--danger);
+            font-size: 12px;
+            margin-top: -15px;
             margin-bottom: 10px;
-            padding-right: 15px;
+            padding-right: 5px;
         }
 
+        /* استعارة نمط الزر من الكود الثاني */
         .wrapper .btn {
             width: 100%;
-            height: 45px;
-            background: #fff;
+            height: 48px;
+            background: var(--primary);
             border: none;
             outline: none;
-            border-radius: 40px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+            border-radius: 12px;
             cursor: pointer;
             font-size: 16px;
-            color: #333;
-            font-weight: 600;
-            margin-top: 10px;
+            color: #fff;
+            font-weight: bold;
+            margin-top: 15px;
             transition: 0.3s;
         }
 
         .wrapper .btn:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: scale(1.02);
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
         }
 
         .register-link {
-            font-size: 14.5px;
+            font-size: 14px;
             text-align: center;
-            margin: 20px 0 10px;
+            margin: 25px 0 10px;
+            color: #4b5563;
         }
 
         .register-link p a {
-            color: #fff;
+            color: var(--primary);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: bold;
         }
 
         .register-link p a:hover {
@@ -143,8 +152,8 @@
         .note {
             font-size: 11px;
             text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 15px;
+            color: #9ca3af;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -154,8 +163,8 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
             
-            <h1>إنشاء حساب</h1>
-            <p class="subtitle">أدخل بيانات الجهة لإنشاء حساب جديد</p>
+            <h1>إنشاء حساب جديد</h1>
+            <p class="subtitle">أدخل بيانات الجهة للانضمام إلى المنصة</p>
 
             <div class="input-box">
                 <input type="text" name="name" placeholder="اسم الجهة التعليمية" value="{{ old('name') }}" required autofocus>
@@ -187,7 +196,7 @@
                 <p>لديك حساب بالفعل؟ <a href="{{ route('login') }}">سجل الدخول</a></p>
             </div>
 
-            <p class="note">بالنقر على "تسجيل"، فإنك توافق على سياسات المنصة.</p>
+            <p class="note">بالنقر على "تسجيل"، فإنك توافق على سياسات المنصة وشروط الاستخدام.</p>
         </form>
     </div>
 

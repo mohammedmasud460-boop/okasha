@@ -3,228 +3,241 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="shortcut icon" href="{{asset('image/logono.png')}}" type="image/x-icon">
     <title>شهادة إنجاز - {{ $student->name }}</title>
     <style>
-        /* إعدادات الطباعة mPDF */
+        /* إعدادات الطباعة لـ mPDF */
         @page {
             margin: 0;
             size: A4 landscape;
         }
 
+        :root {
+            --cert-gold: #c5a059;
+            --cert-navy: #1e3a8a;
+            --cert-bg: #f8fafc;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
             margin: 0;
             padding: 0;
             direction: rtl;
-            font-family: 'sans-serif';
-            background-color: #f3f4f6; /* لون خلفية الصفحة خارج الشهادة */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cert-bg);
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
         }
 
-        /* حاوية الشهادة كأنها ورقة مستقلة */
-        .certificate-paper {
-            width: 297mm; /* عرض A4 landscape */
-            height: 210mm; /* طول A4 landscape */
-            background-image: url("{{ $backgroundImage ?? '' }}");
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-color: white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* ظل للمعاينة فقط */
-            position: relative;
-            margin: 20px 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* المحتوى داخل الشهادة */
-        .certificate-content {
-            width: 85%;
-            height: 80%;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .title {
-            color: #4338ca;
-            font-size: 45pt;
-            font-weight: bold;
-            margin-top: 40pt;
-        }
-
-        .recipient-section {
-            margin: 25pt 0;
-        }
-
-        .subtitle-text {
-            font-size: 20pt;
-            color: #4b5563;
-        }
-
-        .student-name {
-            font-size: 38pt;
-            color: #b91c1c;
-            font-weight: bold;
-            display: block;
-            margin-top: 10pt;
-            border-bottom: 2pt solid #b91c1c;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .course-info {
-            font-size: 20pt;
-            line-height: 1.6;
-            margin: 20pt auto;
-            color: #1f2937;
-        }
-
-        .course-name {
-            font-weight: bold;
-            font-size: 24pt;
-        }
-
-        .meta-data {
-            font-size: 12pt;
-            color: #6b7280;
-            margin-top: 15pt;
-        }
-
-        .footer-table {
-            width: 100%;
-            margin-top: 30pt;
-            border-collapse: collapse;
-        }
-
-        .footer-cell {
-            width: 33.3%;
-            vertical-align: middle;
-            text-align: center;
-        }
-
-        .signature-line {
-            border-top: 1.5pt solid #374151;
-            width: 140pt;
-            margin: 0 auto 5pt;
-        }
-
-        .manager-title {
-            font-weight: bold;
-            font-size: 14pt;
-        }
-
-        /* أزرار التحكم */
+        /* --- أزرار التحكم --- */
         .actions {
             width: 100%;
-            padding: 15px 0;
-            background: #ffffff;
+            padding: 15px;
+            background: #fff;
             display: flex;
             justify-content: center;
-            gap: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            gap: 10px;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .btn {
             padding: 10px 20px;
             text-decoration: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: bold;
+            font-size: 14px;
             transition: 0.3s;
         }
-        .btn-primary { background: #4338ca; color: white; }
-        .btn-secondary { background: #6b7280; color: white; }
+        .btn-download { background: var(--cert-navy); color: white; }
+        .btn-back { background: #64748b; color: white; }
 
-        /* تعديلات الطباعة mPDF */
-        @media print {
-            body { background-color: white; }
-            .actions { display: none; }
-            .certificate-paper {
-                margin: 0;
-                box-shadow: none;
-                width: 100%;
-                height: 100%;
-                background-image: url("{{ public_path('image/qw1.jpeg') }}") !important;
-            }
+        /* --- حاوية الشهادة --- */
+        .certificate-container {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
         }
 
-        /* للجوال */
-        @media screen and (max-width: 297mm) {
+        .certificate-paper {
+            width: 297mm;
+            height: 210mm;
+            background-image: url("{{ $backgroundImage ?? '' }}");
+            background-size: 100% 100%;
+            background-color: white;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            padding: 50pt 70pt;
+        }
+
+        .main-title {
+            color: var(--cert-navy);
+            font-size: 48pt;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 10pt;
+            margin-top: 10pt;
+        }
+
+        .statement {
+            font-size: 18pt;
+            color: #475569;
+            text-align: center;
+            margin: 15pt 0;
+        }
+
+        .student-name {
+            font-size: 40pt;
+            color: #111827;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2pt double var(--cert-gold);
+            display: block;
+            width: fit-content;
+            margin: 5pt auto 20pt;
+            padding-bottom: 5pt;
+        }
+
+        .course-text {
+            font-size: 19pt;
+            line-height: 1.6;
+            color: #1e293b;
+            text-align: center;
+            margin-bottom: 30pt;
+        }
+
+        .course-name {
+            color: var(--cert-navy);
+            font-weight: bold;
+            font-size: 24pt;
+        }
+
+        /* --- التذييل المحدث (المدرب يميناً والتوقيع يساراً) --- */
+        .cert-footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 30pt;
+        }
+
+        .footer-box {
+            text-align: center;
+            flex: 1;
+        }
+
+        .footer-box.right { text-align: right; } /* المدرب يمين */
+        .footer-box.left { text-align: left; }   /* التوقيع يسار */
+
+        .sig-line {
+            border-top: 1.5pt solid #1e293b;
+            width: 180pt;
+            margin-bottom: 8pt;
+        }
+        
+        /* موازنة الخطوط في المحاذاة الجانبية */
+        .footer-box.left .sig-line { margin-left: 0; margin-right: auto; }
+        .footer-box.right .sig-line { margin-right: 0; margin-left: auto; }
+
+        .label-text {
+            font-size: 12pt;
+            color: #64748b;
+            margin-bottom: 5pt;
+        }
+
+        .name-text {
+            font-weight: bold;
+            font-size: 16pt;
+            color: #1e293b;
+        }
+
+        /* الختم في المنتصف */
+        .seal-box {
+            width: 80pt;
+            height: 80pt;
+            border: 2pt double var(--cert-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cert-gold);
+            font-size: 10pt;
+            font-weight: bold;
+            transform: rotate(-15deg);
+            margin: 0 auto;
+        }
+
+        /* --- ميزات الجوال --- */
+        @media screen and (max-width: 1024px) {
             .certificate-paper {
-                width: 95vw;
-                height: 67vw; /* يحافظ على النسبة المئوية للـ A4 */
-                background-size: cover;
+                width: 100%;
+                height: auto;
+                aspect-ratio: 297/210;
+                padding: 5% 7%;
             }
-            .title { font-size: 25pt; }
-            .student-name { font-size: 22pt; }
-            .course-info { font-size: 12pt; }
+            .main-title { font-size: 6vw; }
+            .student-name { font-size: 5vw; }
+            .course-text { font-size: 2.5vw; }
+            .name-text { font-size: 2vw; }
+            .sig-line { width: 25vw; }
+        }
+
+        @media print {
+            .actions { display: none; }
+            .certificate-paper { box-shadow: none; border: none; margin: 0; }
         }
     </style>
 </head>
 <body>
 
     <div class="actions">
-        <a href="{{ route('pdf.download2', $student->id) }}" class="btn btn-primary">💾 تحميل PDF</a>
-        <a href="{{ route('certificates.index', $student->id) }}" class="btn btn-secondary">↩ رجوع</a>
+        <a href="{{ route('pdf.download2', $student->id) }}" class="btn btn-download">💾 تحميل PDF</a>
+        <a href="javascript:history.back()" class="btn btn-back">↩ رجوع</a>
     </div>
 
-    <div class="certificate-paper">
-        <div class="certificate-content">
+    <div class="certificate-container">
+        <div class="certificate-paper">
             
-            <div class="title">شهادة إنجاز</div>
+            <div class="header">
+                <div class="main-title">شهادة إنجاز</div>
+                <div class="statement">تتشرف المنصة بمنح هذه الشهادة لـ :</div>
+            </div>
 
-            <div class="recipient-section">
-                <span class="subtitle-text">تمنح هذه الشهادة تقديراً للجهود المتميزة لـ :</span>
+            <div class="recipient">
                 <div class="student-name">{{ $student->name }}</div>
             </div>
 
-            <div class="course-info">
-                لاجتيازه بنجاح البرنامج التدريبي المكثف بعنوان:<br>
-                <span class="course-name">" {{ $student->course ?? 'دورة تدريبية متقدمة' }} "</span><br>
-                والذي عُقد بتقدير عام بلغ <strong>{{ $student->degree }}%</strong>.
+            <div class="course-text">
+                وذلك لاجتيازه بنجاح البرنامج التدريبي بعنوان:<br>
+                <span class="course-name">" {{ $student->course }} "</span><br>
+                والمنعقد في تاريخ {{ $student->course_date }}م بتقدير {{ $student->degree }}%
             </div>
 
-            <div class="meta-data">
-                رقم الشهادة: {{ $student->id . str_pad($student->id, 5, '0', STR_PAD_LEFT) }} &nbsp; | &nbsp; 
-                تاريخ الإصدار: {{ $student->course_date ? \Carbon\Carbon::parse($student->course_date)->format('Y/m/d') : date('Y/m/d') }}م
+            <div class="cert-footer">
+                <div class="footer-box right">
+                    <div class="label-text">مدرب البرنامج</div>
+                    <div class="sig-line"></div>
+                    <div class="name-text">أ.{{ auth()->user()->name }}</div>
+                </div>
+
+                <div class="footer-box">
+                    <div class="seal-box">الختم الرسمي</div>
+                </div>
+
+                <div class="footer-box left">
+                    <div class="label-text">التوقيع </div>
+                    <div class="sig-line"></div>
+                    <div class="name-text"></div>
+                </div>
             </div>
 
-            <table class="footer-table">
-                <tr>
-                    <td class="footer-cell">
-                        <div class="signature-area">
-                            <div class="signature-line"></div>
-                            <div class="manager-title">{{ auth()->user()->name ?? 'مدير الأكاديمية' }}</div>
-                            <div style="font-size: 11pt;">المدير العام</div>
-                        </div>
-                    </td>
-
-                    <td class="footer-cell">
-                        <div class="seal-area">
-                            @if(isset($logoDataUri))
-                                <img src="{{ $logoDataUri }}" style="width: 80pt;">
-                            @else
-                                <div style="border: 1.5pt dashed #ccc; width: 60pt; height: 60pt; border-radius: 50%; line-height: 60pt; margin: 0 auto; color: #ccc; font-size: 9pt;">الختم الرسمي</div>
-                            @endif
-                        </div>
-                    </td>
-
-                    <td class="footer-cell">
-                        <div style="font-size: 10pt; color: #6b7280;">
-                            يمكن التحقق من صحة الشهادة عبر<br> مسح رمز الاستجابة السريع (QR)
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            
         </div>
     </div>
 

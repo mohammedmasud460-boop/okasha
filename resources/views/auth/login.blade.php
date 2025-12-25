@@ -3,160 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول</title>
+    <title>تسجيل الدخول | منصة شهادتي</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
     <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --danger: #dc2626;
+            --border: #e5e7eb;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Poppins", "Tahoma", sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
+            /* مطابقة الخلفية المتدرجة للكود الثاني */
+            background-image: linear-gradient(to top right, #5ce7f6ff, #ffffffff);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            /* استبدل bg.jpg برابط الصورة الفعلي أو مسارها في Laravel */
-            background: url("{{ asset('image/home.jpg') }}") no-repeat;
-            background-size: cover;
-            background-position: center;
+            margin: 0;
+            padding: 20px;
         }
 
         .wrapper {
-            width: 420px;
-            background: transparent;
-            border: 2px solid rgba(255, 255, 255, .2);
-            backdrop-filter: blur(9px);
-            color: #fff;
-            border-radius: 12px;
-            padding: 30px 40px;
+            width: clamp(320px, 90vw, 450px);
+            /* مطابقة النمط الزجاجي (Glassmorphism) */
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            color: #1f2937;
         }
 
         .wrapper h1 {
-            font-size: 36px;
+            font-size: 28px;
             text-align: center;
-            margin-bottom: 10px;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 25px;
         }
 
         .status {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 15px;
+            background: rgba(16, 185, 129, 0.1);
+            color: #065f46;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 20px;
             font-size: 14px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
         .wrapper .input-box {
             position: relative;
             width: 100%;
             height: 50px;
-            margin: 30px 0;
+            margin: 20px 0;
         }
 
         .input-box input {
             width: 100%;
             height: 100%;
-            background: transparent;
-            border: none;
+            background: #fff;
+            border: 1px solid var(--border);
             outline: none;
-            border: 2px solid rgba(255, 255, 255, .2);
-            border-radius: 40px;
-            font-size: 16px;
-            color: #fff;
-            padding: 20px 45px 20px 20px;
+            border-radius: 12px;
+            font-size: 15px;
+            color: #333;
+            padding: 0 45px 0 15px; /* RTL: الأيقونة على اليمين */
+            transition: all 0.3s ease;
         }
 
-        .input-box input::placeholder {
-            color: #fff;
+        .input-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
         }
 
         .input-box i {
             position: absolute;
-            left: 20px; /* تم التعديل ليتناسب مع RTL */
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
             font-size: 20px;
+            color: var(--primary);
         }
 
         .error-message {
-            color: #ff4d4d;
+            color: var(--danger);
             font-size: 12px;
-            margin-top: -20px;
+            margin-top: -15px;
             margin-bottom: 10px;
-            padding-right: 15px;
+            padding-right: 5px;
         }
 
         .wrapper .remember-forgot {
             display: flex;
             justify-content: space-between;
-            font-size: 14.5px;
-            margin: -15px 0 15px;
+            align-items: center;
+            font-size: 14px;
+            margin-bottom: 25px;
+            color: #4b5563;
+        }
+
+        .remember-forgot label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
         }
 
         .remember-forgot label input {
-            accent-color: #fff;
-            margin-left: 5px; /* مسافة للغة العربية */
+            accent-color: var(--primary);
+            margin-left: 8px;
+            width: 16px;
+            height: 16px;
         }
 
         .remember-forgot a {
-            color: #fff;
+            color: var(--primary);
             text-decoration: none;
+            font-weight: 600;
         }
 
         .remember-forgot a:hover {
             text-decoration: underline;
         }
 
+        /* مطابقة نمط الزر */
         .wrapper .btn {
             width: 100%;
-            height: 45px;
-            background: #fff;
+            height: 48px;
+            background: var(--primary);
             border: none;
-            outline: none;
-            border-radius: 40px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+            border-radius: 12px;
             cursor: pointer;
             font-size: 16px;
-            color: #333;
-            font-weight: 600;
-            margin-bottom: 10px;
-            transition: 0.3s;
+            color: #fff;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
         }
 
         .wrapper .btn:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: scale(1.02);
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
         }
 
         .btn-back {
             display: block;
             text-align: center;
-            width: 100%;
-            color: #fff;
+            color: #6b7280;
             text-decoration: none;
             font-size: 14px;
-            margin-top: 10px;
-        }
-
-        .wrapper .register-link {
-            font-size: 14.5px;
-            text-align: center;
-            margin: 20px 0 15px;
-        }
-
-        .register-link p a {
-            color: #fff;
-            text-decoration: none;
             font-weight: 600;
+            transition: 0.3s;
         }
 
-        .register-link p a:hover {
+        .btn-back:hover {
+            color: var(--primary);
+        }
+
+        .register-link {
+            font-size: 14px;
+            text-align: center;
+            margin-top: 25px;
+            color: #4b5563;
+        }
+
+        .register-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .register-link a:hover {
             text-decoration: underline;
         }
     </style>
@@ -168,6 +204,7 @@
             @csrf
             
             <h1>تسجيل الدخول</h1>
+            <p class="subtitle">مرحباً بك مجدداً في منصة شهادتي</p>
 
             {{-- حالة الجلسة --}}
             @if (session('status'))
@@ -178,7 +215,7 @@
 
             <div class="input-box">
                 <input type="email" name="email" placeholder="البريد الإلكتروني" value="{{ old('email') }}" required autofocus>
-                <i class='bx bxs-user'></i>
+                <i class='bx bxs-envelope'></i>
             </div>
             @error('email')
                 <div class="error-message">{{ $message }}</div>
@@ -201,7 +238,9 @@
 
             <button type="submit" class="btn">دخول</button>
             
-            <a href="{{ url()->previous() }}" class="btn-back">رجوع</a>
+            <a href="{{ url()->previous() }}" class="btn-back">
+                <i class='bx bx-right-arrow-alt' style="vertical-align: middle;"></i> رجوع
+            </a>
 
             <div class="register-link">
                 <p>ليس لديك حساب؟ <a href="{{ route('register') }}">سجل الآن</a></p>
