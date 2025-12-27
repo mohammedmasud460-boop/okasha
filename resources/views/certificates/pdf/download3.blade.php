@@ -2,10 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8">
-    
     <style>
-        /* إعدادات مخصصة لمكتبة mPDF - هذا هو الجزء الأهم للتحميل */
-           @page {
+        /* إعدادات الصفحة لـ mPDF لضمان خلفية كاملة وبدون هوامش بيضاء */
+         @page {
         margin: 0;
         background-image: url("{{ $backgroundImage }}");
         background-image-resize: 6;
@@ -15,141 +14,149 @@
             margin: 0;
             padding: 0;
             direction: rtl;
-            font-family: 'sans-serif'; /* خط mPDF المدمج لدعم العربية */
+            font-family: 'sans-serif';
             text-align: center;
-            color: #1f2937;
+            color: #1e1b4b; /* لون كحلي غامق رسمي */
         }
 
-        .certificate-content {
-            width: 100%;
-            height: 100%;
+
+        /* الحاوية الرئيسية بأبعاد A4 landscape */
+        .certificate-paper {
+            
+            width: 297mm;
+            height: 210mm;
+            position: relative;
         }
 
-        .title {
-            color: #4338ca;
-            font-size: 45pt;
-            padding-top: 100pt; /* نفس الإزاحة في كود المعاينة */
+        .main-title {
+            color: #1e3a8a;
+            font-size: 48pt;
             font-weight: bold;
+            padding-top: 60pt; /* تعديل الإزاحة لتناسب تصميم الخلفية */
+            margin-bottom: 10pt;
+            margin-top: 20px;
         }
 
-        .recipient-section {
-            margin: 40pt 0;
-        }
-
-        .subtitle-text {
-            font-size: 22pt;
-            color: #4b5563;
+        .statement {
+            font-size: 18pt;
+            color: #475569;
+            margin: 15pt 0;
         }
 
         .student-name {
-            font-size: 35pt;
-            color: #b91c1c;
+            font-size: 40pt;
+            color: #111827;
             font-weight: bold;
-            display: block;
-            margin-top: 10pt;
-            text-decoration: underline;
+            margin: 10pt auto 20pt;
+            /* استخدام border بدلاً من text-decoration للتحكم في شكل الخط الذهبي */
+         
+            width: fit-content;
+            padding-bottom: 5pt;
         }
 
-        .course-info {
-            font-size: 20pt;
+        .course-text {
+            font-size: 19pt;
             line-height: 1.6;
-            margin: 30pt 50pt;
+            color: #1e293b;
+            margin: 0 60pt 30pt;
         }
 
         .course-name {
-            color: #111827;
+            color: #1e3a8a;
             font-weight: bold;
             font-size: 24pt;
         }
 
-        .meta-data {
-            font-size: 13pt;
-            color: #6b7280;
-            margin-top: 20pt;
-        }
-
-        /* التذييل المنظم باستخدام الجداول (الأضمن في mPDF) */
+        /* استخدام الجداول هو الحل الوحيد المضمون في mPDF لتوزيع العناصر جانبيًا */
         .footer-table {
-            width: 90%;
-            margin: 50pt auto 0;
+            width: 85%;
+            margin: 40pt auto 0;
             border-collapse: collapse;
         }
 
         .footer-cell {
             width: 33.3%;
-            vertical-align: middle;
+            vertical-align: bottom;
             text-align: center;
         }
 
-        .signature-line {
-            border-top: 1.5pt solid #374151;
-            width: 140pt;
-            margin: 0 auto 5pt;
+        .footer-cell.right { text-align: right; }
+        .footer-cell.left { text-align: left; }
+
+        .sig-line {
+            border-top: 1.5pt solid #1e293b;
+            width: 160pt;
+            margin-bottom: 8pt;
         }
 
-        .manager-title {
+        /* ضبط محاذاة الخطوط داخل خلايا الجدول */
+        .footer-cell.left .sig-line { margin-left: 0; margin-right: auto; }
+        .footer-cell.right .sig-line { margin-right: 0; margin-left: auto; }
+
+        .label-text {
+            font-size: 12pt;
+            color: #64748b;
+            margin-bottom: 5pt;
+        }
+
+        .name-text {
             font-weight: bold;
-            font-size: 15pt;
+            font-size: 16pt;
+            color: #1e293b;
         }
 
-        .seal-area img {
-            width: 90pt;
-            height: auto;
+        /* الختم الرسمي */
+        .seal-box {
+            width: 85pt;
+            height: 85pt;
+            border: 2pt double #c5a059;
+            border-radius: 50%;
+            line-height: 85pt;
+            text-align: center;
+            color: #c5a059;
+            font-size: 11pt;
+            font-weight: bold;
+            margin: 0 auto;
+            /* تأثير دوران بسيط كما في الكود السابق */
+            transform: rotate(-15deg);
         }
     </style>
 </head>
 <body>
-
-    <div class="certificate-content">
+    <div class="certificate-paper">
         
-        <div class="title">شهادة إنجاز</div>
+        <div class="main-title">شهادة إنجاز</div>
+        
+        <div class="statement">تتشرف المنصة بمنح هذه الشهادة لـ :</div>
 
-        <div class="recipient-section">
-            <span class="subtitle-text">تمنح هذه الشهادة تقديراً للجهود المتميزة لـ :</span>
-            <div class="student-name">{{ $student->name }}</div>
-        </div>
+        <div class="student-name">{{ $student->name }}</div>
 
-        <div class="course-info">
-            لاجتيازه بنجاح البرنامج التدريبي المكثف بعنوان:<br>
-            <span class="course-name">" {{ $student->course ?? 'دورة تدريبية متقدمة' }} "</span><br>
-            والذي عُقد بتقدير عام بلغ <strong>{{ $student->degree }}%</strong>.
-        </div>
-
-        <div class="meta-data">
-            رقم الشهادة: {{ $student->id . str_pad($student->id, 5, '0', STR_PAD_LEFT) }} &nbsp; | &nbsp; 
-            تاريخ الإصدار: {{ $student->course_date ? \Carbon\Carbon::parse($student->course_date)->format('Y/m/d') : date('Y/m/d') }}م
+        <div class="course-text">
+            وذلك لاجتيازه بنجاح البرنامج التدريبي بعنوان:
+            <span class="course-name">" {{ $student->course }} "</span><br>
+            والمنعقد في تاريخ {{ $student->course_date }}م بتقدير {{ $student->degree }}%
         </div>
 
         <table class="footer-table">
             <tr>
-                <td class="footer-cell">
-                    <div class="signature-area">
-                        <div class="signature-line"></div>
-                        <div class="manager-title">{{ auth()->user()->name ?? 'مدير الأكاديمية' }}</div>
-                        <div style="font-size: 11pt;">المدير العام</div>
-                    </div>
+                <td class="footer-cell right">
+                    <div class="label-text">مدرب البرنامج</div>
+                    <div class="sig-line"></div>
+                    <div class="name-text">أ. {{ auth()->user()->name }}</div>
                 </td>
 
                 <td class="footer-cell">
-                    <div class="seal-area">
-                        @if(isset($logoDataUri))
-                            {{-- في التحميل يفضل استخدام المسار المباشر أو Base64 --}}
-                            <img src="{{ $logoDataUri }}">
-                        @else
-                            <div style="border: 2pt dashed #ccc; width: 80pt; height: 80pt; border-radius: 50%; line-height: 80pt; margin: 0 auto; color: #ccc; font-size: 10pt;">الختم الرسمي</div>
-                        @endif
-                    </div>
+                    <div class="seal-box">الختم الرسمي</div>
                 </td>
 
-                <td class="footer-cell">
-                    <div style="font-size: 10pt; color: #6b7280;">
-                        يمكن التحقق من صحة الشهادة عبر<br> مسح رمز الاستجابة السريع (QR)
-                    </div>
+                <td class="footer-cell left">
+                    <div class="label-text">اعتماد الإدارة</div>
+                    <div class="sig-line"></div>
+                    <div class="name-text">مصادقة رقمية</div>
                 </td>
             </tr>
         </table>
-        
-    </div>
 
+    </div>
 </body>
 </html>

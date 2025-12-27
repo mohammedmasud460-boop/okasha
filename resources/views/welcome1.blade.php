@@ -95,6 +95,10 @@
             display: block;
         }
 
+        .bx-x {
+            display: none;
+        }
+
         .hero-section h1 {
             font-size: clamp(32px, 5vw, 52px);
             color: var(--primary-navy);
@@ -173,6 +177,9 @@
                 padding: 100px 30px;
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1);
             }
+            .bx-x {
+            display: block;
+        }
             .nav-links.active { right: 0; }
             .nav-links ul { flex-direction: column; text-align: right; }
             .mobile-toggle { display: block; }

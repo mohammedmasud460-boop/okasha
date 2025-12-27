@@ -70,11 +70,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/certificates/show1/{student}', [CertificateController::class, 'show1'])->name('certificate.show1');
     Route::get('/certificates/show2/{student}', [CertificateController::class, 'show2'])->name('certificate.show2');
     Route::get('/certificates/show3/{student}', [CertificateController::class, 'show3'])->name('certificate.show3');
+    Route::get('/certificates/show4/{student}', [CertificateController::class, 'show4'])->name('certificate.show4');
+    Route::get('/certificates/show5/{student}', [CertificateController::class, 'show5'])->name('certificate.show5');
+    Route::get('/certificates/show6/{student}', [CertificateController::class, 'show6'])->name('certificate.show6');
+    Route::get('/certificates/show7/{student}', [CertificateController::class, 'show7'])->name('certificate.show7');
+    Route::get('/certificates/show8/{student}', [CertificateController::class, 'show8'])->name('certificate.show8');
+    Route::get('/certificates/show9/{student}', [CertificateController::class, 'show9'])->name('certificate.show9');
 
     // تحميل الـ PDF (باستخدام mPDF لجميع القوالب لضمان الجودة)
     Route::get('/certificates/download1/{student}', [CertificateController::class, 'download1'])->name('pdf.download1');
     Route::get('/certificates/download2/{student}', [CertificateController::class, 'download2'])->name('pdf.download2');
     Route::get('/certificates/download3/{student}', [CertificateController::class, 'download3'])->name('pdf.download3');
+    Route::get('/certificates/download4/{student}', [CertificateController::class, 'download4'])->name('pdf.download4');
+    Route::get('/certificates/download5/{student}', [CertificateController::class, 'download5'])->name('pdf.download5');
+    Route::get('/certificates/download6/{student}', [CertificateController::class, 'download6'])->name('pdf.download6');
+    Route::get('/certificates/download7/{student}', [CertificateController::class, 'download7'])->name('pdf.download7');
+    Route::get('/certificates/download8/{student}', [CertificateController::class, 'download8'])->name('pdf.download8');
+    Route::get('/certificates/download9/{student}', [CertificateController::class, 'download9'])->name('pdf.download9');
 });
 
 

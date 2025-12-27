@@ -69,11 +69,121 @@ class CertificateController extends Controller
         'backgroundImage' => $base64
     ]);    }
 
+     public function show4(Student $student) {
+// تحديد مسار الصورة
+    $path = public_path('image/qw4.jpeg');
+    $base64 = '';
+
+    // التحقق من وجود الصورة وتحويلها
+    if (file_exists($path)) {
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    }
+
+    // تمرير الطالب وصورة الخلفية للمعاينة
+    return view('certificates.certificate4', [
+        'student' => $student,
+        'backgroundImage' => $base64
+    ]);    }
+
+     public function show5(Student $student) {
+// تحديد مسار الصورة
+    $path = public_path('image/qw5.jpeg');
+    $base64 = '';
+
+    // التحقق من وجود الصورة وتحويلها
+    if (file_exists($path)) {
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    }
+
+    // تمرير الطالب وصورة الخلفية للمعاينة
+    return view('certificates.certificate5', [
+        'student' => $student,
+        'backgroundImage' => $base64
+    ]);    }
+     public function show6(Student $student) {
+// تحديد مسار الصورة
+    $path = public_path('image/qw6.jpeg');
+    $base64 = '';
+
+    // التحقق من وجود الصورة وتحويلها
+    if (file_exists($path)) {
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    }
+
+    // تمرير الطالب وصورة الخلفية للمعاينة
+    return view('certificates.certificate6', [
+        'student' => $student,
+        'backgroundImage' => $base64
+    ]);    }
+     public function show7(Student $student) {
+// تحديد مسار الصورة
+    $path = public_path('image/qw7.jpeg');
+    $base64 = '';
+
+    // التحقق من وجود الصورة وتحويلها
+    if (file_exists($path)) {
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    }
+
+    // تمرير الطالب وصورة الخلفية للمعاينة
+    return view('certificates.certificate7', [
+        'student' => $student,
+        'backgroundImage' => $base64
+    ]);    }
+     public function show8(Student $student) {
+// تحديد مسار الصورة
+    $path = public_path('image/qw8.jpeg');
+    $base64 = '';
+
+    // التحقق من وجود الصورة وتحويلها
+    if (file_exists($path)) {
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    }
+
+    // تمرير الطالب وصورة الخلفية للمعاينة
+    return view('certificates.certificate8', [
+        'student' => $student,
+        'backgroundImage' => $base64
+    ]);    }
+     public function show9(Student $student) {
+// تحديد مسار الصورة
+    $path = public_path('image/qw9.jpeg');
+    $base64 = '';
+
+    // التحقق من وجود الصورة وتحويلها
+    if (file_exists($path)) {
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    }
+
+    // تمرير الطالب وصورة الخلفية للمعاينة
+    return view('certificates.certificate9', [
+        'student' => $student,
+        'backgroundImage' => $base64
+    ]);    }
+
     // دوال التحميل (Download) باستخدام mPDF
     // دوال التحميل أصبحت بسيطة وتمرر رقم القالب فقط
 public function download1(Student $student) { return $this->generateMPDF($student, 1); }
 public function download2(Student $student) { return $this->generateMPDF($student, 2); }
 public function download3(Student $student) { return $this->generateMPDF($student, 3); }
+public function download4(Student $student) { return $this->generateMPDF($student, 4); }
+public function download5(Student $student) { return $this->generateMPDF($student, 5); }
+public function download6(Student $student) { return $this->generateMPDF($student, 6); }
+public function download7(Student $student) { return $this->generateMPDF($student, 7); }
+public function download8(Student $student) { return $this->generateMPDF($student, 8); }
+public function download9(Student $student) { return $this->generateMPDF($student, 9); }
 
 // دالة توليد الـ PDF الموحدة
 private function generateMPDF($student, $templateNum) {
@@ -81,7 +191,13 @@ private function generateMPDF($student, $templateNum) {
     $templateImages = [
         1 => 'qw1.jpeg',
         2 => 'qw2.jpeg',
-        3 => 'qw.png', // تأكد من مطابقة مسميات الملفات في مجلد image
+        3 => 'qw3.jpeg', // تأكد من مطابقة مسميات الملفات في مجلد image
+        4 => 'qw4.jpeg', // تأكد من مطابقة مسميات الملفات في مجلد image
+        5 => 'qw5.jpeg', // تأكد من مطابقة مسميات الملفات في مجلد image
+        6 => 'qw6.jpeg', // تأكد من مطابقة مسميات الملفات في مجلد image
+        7 => 'qw7.jpeg', // تأكد من مطابقة مسميات الملفات في مجلد image
+        8 => 'qw8.jpeg', // تأكد من مطابقة مسميات الملفات في مجلد image
+        9 => 'qw9.jpeg', // تأكد من مطابقة مسميات الملفات في مجلد image
     ];
 
     $imageName = $templateImages[$templateNum] ?? 'qw1.jpeg';

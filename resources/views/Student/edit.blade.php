@@ -172,6 +172,7 @@
             <ul>
                 <li><a href="{{ route('welcome1') }}">الرئيسية</a></li>
                 <li><a href="{{ route('dashboard') }}">قائمة المستفيدين</a></li>
+                 
             </ul>
         </div>
     </nav>

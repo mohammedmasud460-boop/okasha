@@ -194,6 +194,7 @@
             <ul>
                 <li><a href="{{ route('welcome1') }}">الرئيسية</a></li>
                 <li><a href="{{ route('dashboard') }}">المستفيدين</a></li>
+                <li><a href="{{ route('logout') }}">تسجيل الخروج</a></li>
             </ul>
         </div>
     </nav>

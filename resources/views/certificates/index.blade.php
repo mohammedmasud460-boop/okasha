@@ -62,6 +62,99 @@
                     </div>
                 </div>
             </div>
+
+
+               <div class="col-md-4">
+                <div class="card h-100 template-card shadow-sm">
+                    <img src="{{ asset('image/qw4.jpeg') }}" class="card-img-top" alt="الدرع الرقمي">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">الدرع الرقمي</h5>
+                        <p class="card-text text-muted small">تصميم مستقبلي بنمط تقني عالي، مخصص لمجالات الأمن السيبراني والذكاء الاصطناعي</p>
+                        <div class="d-grid gap-2">
+                            <a href="{{ route('certificate.show4', $student->id) }}" class="btn btn-outline-primary">معاينة القالب</a>
+                            <a href="{{ route('pdf.download4', $student->id) }}" class="btn btn-primary">تحميل PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+               <div class="col-md-4">
+                <div class="card h-100 template-card shadow-sm">
+                    <img src="{{ asset('image/qw5.jpeg') }}" class="card-img-top" alt="القالب الكلاسيكي">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">القالب الكلاسيكي</h5>
+                        <p class="card-text text-muted small">تصميم كلاسيكي بوقار مؤسسي، مثالي للشهادات الجامعية والاعتماد الحكومي.</p>
+                        <div class="d-grid gap-2">
+                            <a href="{{ route('certificate.show5', $student->id) }}" class="btn btn-outline-primary">معاينة القالب</a>
+                            <a href="{{ route('pdf.download5', $student->id) }}" class="btn btn-primary">تحميل PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+             
+
+
+
+               <div class="col-md-4">
+                <div class="card h-100 template-card shadow-sm">
+                    <img src="{{ asset('image/qw6.jpeg') }}" class="card-img-top" alt="الإبداع الهندسي">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">الإبداع الهندسي</h5>
+                        <p class="card-text text-muted small">زخارف هندسية متداخلة تعبر عن الدقة، ممتاز للمجالات التقنية والبرمجية.</p>
+                        <div class="d-grid gap-2">
+                            <a href="{{ route('certificate.show6', $student->id) }}" class="btn btn-outline-primary">معاينة القالب</a>
+                            <a href="{{ route('pdf.download6', $student->id) }}" class="btn btn-primary">تحميل PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+               <div class="col-md-4">
+                <div class="card h-100 template-card shadow-sm">
+                    <img src="{{ asset('image/qw7.jpeg') }}" class="card-img-top" alt="الوسام المهني">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">الوسام المهني</h5>
+                        <p class="card-text text-muted small">تصميم رصين يركز على الكفاءة والخبرة، مثالي لشهادات الخبرة والتدريب الإداري.</p>
+                        <div class="d-grid gap-2">
+                            <a href="{{ route('certificate.show7', $student->id) }}" class="btn btn-outline-primary">معاينة القالب</a>
+                            <a href="{{ route('pdf.download7', $student->id) }}" class="btn btn-primary">تحميل PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+               <div class="col-md-4">
+                <div class="card h-100 template-card shadow-sm">
+                    <img src="{{ asset('image/qw8.jpeg') }}" class="card-img-top" alt="الطراز الأكاديمي">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">الطراز الأكاديمي</h5>
+                        <p class="card-text text-muted small">خلفية بنقوش خفيفة توحي بالعراقة العلمية، مخصص لشهادات التخرج والدبلومات</p>
+                        <div class="d-grid gap-2">
+                            <a href="{{ route('certificate.show8', $student->id) }}" class="btn btn-outline-primary">معاينة القالب</a>
+                            <a href="{{ route('pdf.download8', $student->id) }}" class="btn btn-primary">تحميل PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+              <div class="col-md-4">
+                <div class="card h-100 template-card shadow-sm">
+                    <img src="{{ asset('image/qw9.jpeg') }}" class="card-img-top" alt="مودرن جرافيك">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">مودرن جرافيك</h5>
+                        <p class="card-text text-muted small">تصميم معاصر يجمع بين الأناقة والابتكار، مثالي لشهادات التخرج والمشاريع الإبداعية.</p>
+                        <div class="d-grid gap-2">
+                            <a href="{{ route('certificate.show9', $student->id) }}" class="btn btn-outline-primary">معاينة القالب</a>
+                            <a href="{{ route('pdf.download9', $student->id) }}" class="btn btn-primary">تحميل PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         

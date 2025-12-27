@@ -198,7 +198,7 @@
 <body>
 
     <div class="actions">
-        <a href="{{ route('pdf.download3', $student->id) }}" class="btn btn-download">💾 تحميل PDF</a>
+        <a href="{{ route('pdf.download9', $student->id) }}" class="btn btn-download">💾 تحميل PDF</a>
         <a href="javascript:history.back()" class="btn btn-back">↩ رجوع</a>
     </div>
 

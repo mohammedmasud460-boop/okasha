@@ -184,7 +184,7 @@
                     <i class='bx bxs-lock-alt'></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="password_confirmation" placeholder="تأكيد الكلمة" required>
+                    <input type="password" name="password_confirmation" placeholder=" تأكيد كلمة المرور" required>
                     <i class='bx bxs-check-shield'></i>
                 </div>
             </div>
