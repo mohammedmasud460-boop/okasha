@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
 
 // السارات التي تعرض الطلاب للوجهات لوحت التحكم للجهات 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [StudentController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [StudentController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 });
 
 
@@ -88,6 +88,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/certificates/download8/{student}', [CertificateController::class, 'download8'])->name('pdf.download8');
     Route::get('/certificates/download9/{student}', [CertificateController::class, 'download9'])->name('pdf.download9');
 });
-
-
+// مسار إرسال الشهادة عبر البريد الإلكتروني
+// مسار إرسال الشهادة عبر البريد
+Route::post('/certificates/send-email/{student}/{templateNum}', [CertificateController::class, 'sendEmail'])
+     ->name('certificates.sendEmail');
 require __DIR__.'/auth.php';

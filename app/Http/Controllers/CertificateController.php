@@ -239,4 +239,30 @@ private function generateMPDF($student, $templateNum) {
     // 5. الإخراج المباشر للمتصفح دون حفظ ملفات على القرص
     return $mpdf->Output("certificate_{$student->name}.pdf", 'I');
 }
+
+    public function sendEmail(Student $student, $templateNum) 
+{
+    try {
+        // 1. تجهيز الصورة (نفس منطق التوليد)
+        $imageName = 'qw' . $templateNum . '.jpeg';
+        $imagePath = public_path('image/' . $imageName);
+        
+        if (!file_exists($imagePath)) {
+            return back()->with('error', 'صورة قالب الشهادة غير موجودة.');
+        }
+
+        $imgData = file_get_contents($imagePath);
+        $base64Image = 'data:image/jpeg;base64,' . base64_encode($imgData);
+
+        // 2. إرسال الإيميل مع تمرير البيانات للـ Constructor
+        // تأكد أن كلاس SendMail يستقبل (Student, TemplateNum, Base64Image)
+        \Mail::to($student->email)->send(new \App\Mail\SendMail($student, $templateNum, $base64Image));
+
+        return back()->with('success', 'تم إرسال الشهادة إلى بريد الطالب ' . $student->email . ' بنجاح!');
+        
+    } catch (\Exception $e) {
+        // عرض الخطأ في حال فشل الاتصال بسيرفر الإيميل
+        return back()->with('error', 'فشل الإرسال: ' . $e->getMessage());
+    }
+}
 }

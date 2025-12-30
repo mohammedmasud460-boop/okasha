@@ -200,6 +200,12 @@
     <div class="actions">
         <a href="{{ route('pdf.download3', $student->id) }}" class="btn btn-download">💾 تحميل PDF</a>
         <a href="javascript:history.back()" class="btn btn-back">↩ رجوع</a>
+         <form action="{{ route('certificates.sendEmail', [$student->id, 3]) }}" method="POST" style="display: inline;">
+        @csrf
+        <button type="submit" class="btn-send" onclick="return confirm('هل أنت متأكد من إرسال الشهادة لبريد الطالب؟')">
+            <i class='bx bx-paper-plane'></i> إرسال للبريد
+        </button>
+    </form>
     </div>
 
     <div class="certificate-container">

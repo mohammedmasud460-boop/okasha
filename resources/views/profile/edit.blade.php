@@ -194,7 +194,12 @@
             <ul>
                 <li><a href="{{ route('welcome1') }}">الرئيسية</a></li>
                 <li><a href="{{ route('dashboard') }}">المستفيدين</a></li>
-                <li><a href="{{ route('logout') }}">تسجيل الخروج</a></li>
+                 <li><form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn-logout">
+                        تسجيل الخروج
+                    </button>
+                </form></li>
             </ul>
         </div>
     </nav>
