@@ -175,7 +175,7 @@
     </nav>
 
     <div class="container">
-        <h2>إضافة مستفيد جديد</h2>
+        <h2>إضافة طالب جديد</h2>
 
         @if($errors->any())
             <div class="alert-danger">
@@ -192,7 +192,7 @@
             <div class="alert-success">{{ session('success') }}</div>
         @endif
 
-        <form method="POST" action="{{ route('students.store') }}">
+        <form method="POST" action="{{ route('students.store') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="field">
@@ -220,13 +220,24 @@
                     @error('course_date') <div class="error">{{ $message }}</div> @enderror
                 </div>
 
-                <div class="field" style="flex: 1;">
-                    <label>الدرجة النهائية</label>
-                    <input type="number" name="degree" value="{{ old('degree') }}" min="0" max="100" placeholder="100" required>
-                    @error('degree') <div class="error">{{ $message }}</div> @enderror
-                </div>
+               <div class="field" style="flex: 1;">
+    <label>التقدير العام</label>
+    <select name="degree" required 
+        style="width: 100%; padding: 12px 15px; border: 1px solid var(--border); border-radius: 10px; font-size: 14px; background: #fff;">
+        <option value="" disabled {{ old('degree') ? '' : 'selected' }}>اختر التقدير</option>
+        <option value="ممتاز" {{ old('degree') == 'ممتاز' ? 'selected' : '' }}>ممتاز</option>
+        <option value="جيد جداً" {{ old('degree') == 'جيد جداً' ? 'selected' : '' }}>جيد جداً</option>
+        <option value="جيد" {{ old('degree') == 'جيد' ? 'selected' : '' }}>جيد</option>
+        <option value="مقبول" {{ old('degree') == 'مقبول' ? 'selected' : '' }}>مقبول</option>
+    </select>
+    @error('degree') <div class="error">{{ $message }}</div> @enderror
+</div>
             </div>
-
+            <div class="field">
+                <label>صورة الطالب (اختياري)</label>
+                <input type="file" name="image" accept="image/*" >
+                @error('image') <div class="error">{{ $message }}</div> @enderror   
+            </div>
             <div class="actions">
                 <button type="submit" class="btn btn-primary">حفظ البيانات</button>
                 <a href="{{ route('dashboard') }}" class="btn btn-outline">إلغاء</a>

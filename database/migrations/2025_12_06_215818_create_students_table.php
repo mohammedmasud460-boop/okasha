@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('course');
             $table->date('course_date');
             $table->string('degree');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

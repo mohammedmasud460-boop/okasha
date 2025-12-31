@@ -180,7 +180,7 @@
         @media (max-width: 640px) {
             .row { grid-template-columns: 1fr; }
             nav { padding: 10px 2%; }
-            .nav-links { display: none; }
+          
         }
     </style>
 </head>
@@ -193,8 +193,8 @@
         <div class="nav-links">
             <ul>
                 <li><a href="{{ route('welcome1') }}">الرئيسية</a></li>
-                <li><a href="{{ route('dashboard') }}">المستفيدين</a></li>
-                 <li><form method="POST" action="{{ route('logout') }}">
+                <li><a href="{{ route('dashboard') }}">قائمة الطلاب</a></li>
+                 <li><a><form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="btn-logout">
                         تسجيل الخروج

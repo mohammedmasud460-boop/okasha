@@ -43,7 +43,7 @@
         }
 
         /* شريط تنقل رسمي صلب بدون شفافية */
-      nav {
+    nav {
             display: flex;
             padding: 10px 5%;
             justify-content: space-between;
@@ -73,7 +73,6 @@
         }
 
         .nav-links ul li a:hover { color: var(--primary); }
-
         /* حاوية المحتوى الرئيسية - توسيط كامل */
         .content-wrapper {
             flex: 1;
@@ -94,6 +93,13 @@
             margin: 0 auto 30px; /* توسيط الصورة */
             display: block;
         }
+         .menu-icon {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
 
         .bx-x {
             display: none;
@@ -125,7 +131,7 @@
 
         .btn-main {
             text-decoration: none;
-            background-color: var(--primary-navy);
+            background-color: var(--primary);
             color: var(--white);
             padding: 16px 50px;
             font-size: 17px;
@@ -177,6 +183,8 @@
                 padding: 100px 30px;
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1);
             }
+                        .menu-icon { display: block; } /* إظهار أيقونة المنيو */
+
             .bx-x {
             display: block;
         }
@@ -205,7 +213,7 @@
                 </ul>
             </div>
             
-            <i class="bx bx-menu-alt-right mobile-toggle" onclick="toggleMenu()"></i>
+           <i class='bx bx-menu menu-icon' onclick="toggleMenu()"></i>
         </nav>
 
         <main class="content-wrapper">

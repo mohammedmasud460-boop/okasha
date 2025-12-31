@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
      <link rel="shortcut icon" href="{{asset('image/logono.png')}}" type="image/x-icon">
     <style>
-        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body {  background-image: linear-gradient(to top right, #5ce7f6ff, #ffffffff); font-family: 'Segoe UI', Tahoma, sans-serif; }
         .template-card { transition: transform 0.3s; border: none; border-radius: 15px; overflow: hidden; }
         .template-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .card-title { color: #4338ca; font-weight: bold; }

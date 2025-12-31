@@ -155,16 +155,17 @@
 
 <div class="container">
     <h2>قائمة المستفيدين</h2>
-    <a href="{{ route('students.create') }}" class="btn btn-primary">إضافة مستفيد +</a>
+    <a href="{{ route('students.create') }}" class="btn btn-primary">إضافة طالب +</a>
 
     <div class="slider">
         @forelse($students as $student)
             <div class="item">
                 <div>
-                    <img class="aimg" src="{{asset('image/avatar-1.png')}}" alt="avatar">
-                    <h1>{{ $student->name }}</h1>
-                    <p><strong>البريد:</strong> {{ $student->email }}</p>
-                    <p><strong>الدرجة:</strong> {{ $student->degree }}%</p>
+<img class="aimg" src="{{ $student->image ? asset('storage/' . $student->image) : asset('image/avtare1.png') }}" alt="صورة الطالب">                    <h1>{{ $student->name }}</h1>
+                
+                    <p><strong>الدورة:</strong> {{ $student->course }}</p>
+                    <p><strong>الدرجة:</strong> {{ $student->degree }}</p>
+                      <!-- <p><strong>البريد:</strong> {{ $student->email }}</p> -->
                 </div>
                 
                 <div class="actions">

@@ -8,7 +8,7 @@ class Student extends Model
 {
 
     protected $table = 'students'; // غيّره إذا كان اسم الجدول مختلف
-    protected $fillable = ['user_id','name','email','course','course_date','degree'];
+    protected $fillable = ['user_id','name','email','course','course_date','degree','image'];
     protected $casts = [
         'course_date' => 'date',
         'degree' => 'string',

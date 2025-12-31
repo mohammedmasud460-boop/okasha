@@ -37,31 +37,38 @@ public function index(): View
 
     /**
      * حفظ طالب جديد.
-     */
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'name'        => 'required|string|max:255',
-            'email'       => 'required|string|email|max:255|unique:students,email',
-            'course'      => 'required|string|max:255',
-            'course_date' => 'required|date', // بصيغة Y-m-d
-            'degree'      => 'required|string|min:0|max:100',
-        ]);
- 
-        $students = Student::create([
-            'user_id'     => auth()->id(),
-            'name'        => $validated['name'],
-            'email'       => $validated['email'],
-            'course'      => $validated['course'],
-            'course_date' => $validated['course_date'],
-            'degree'      => $validated['degree'],
-        ]);
-       
+     */public function store(Request $request)
+{
+    $validated = $request->validate([
+        'name'        => 'required|string|max:255',
+        'email'       => 'required|string|email|max:255|unique:students,email',
+        'course'      => 'required|string|max:255',
+        'course_date' => 'required|date',
+        'degree'      => 'required|string|min:0|max:100',
+        'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        return redirect()
-            ->route('students.create')
-            ->with('success', 'تمت إضافة المستفيد بنجاح: ' . $students->name);
+    // معالجة رفع الصورة بشكل منفصل للتأكد من المسار
+    $imagePath = null;
+    if ($request->hasFile('image')) {
+        // سيتم تخزينها في storage/app/public/student_images
+        $imagePath = $request->file('image')->store('student_images', 'public');
     }
+
+    $student = Student::create([
+        'user_id'     => auth()->id(),
+        'name'        => $validated['name'],
+        'email'       => $validated['email'],
+        'course'      => $validated['course'],
+        'course_date' => $validated['course_date'],
+        'degree'      => $validated['degree'],
+        'image'       => $imagePath, // حفظ المسار الناتج
+    ]);
+
+    return redirect()
+        ->route('students.create')
+        ->with('success', 'تمت إضافة المستفيد بنجاح: ' . $student->name);
+}
 
     /**
      * عرض نموذج تعديل طالب.

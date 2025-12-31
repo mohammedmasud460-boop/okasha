@@ -16,6 +16,11 @@
             --white: #ffffff;
             --border-light: #e2e8f0;
             --success: #16a34a;
+               --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #14e3faff;
+            --border: rgba(255, 255, 255, 0.3);
+            --glass-bg: rgba(255, 255, 255, 0.4);
         }
 
         * {
@@ -34,33 +39,36 @@
         }
 
         /* --- شريط التنقل (نفس تنسيق الصفحة الثانية) --- */
-        nav {
+       nav {
             display: flex;
-            padding: 0 8%;
-            height: 80px;
+            padding: 10px 5%;
             justify-content: space-between;
             align-items: center;
-            background-color: var(--white);
-            border-bottom: 1px solid var(--border-light);
-            position: fixed;
-            top: 0; left: 0; right: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
             z-index: 1000;
         }
 
-        nav img { height: 45px; width: auto; }
+        nav img { width: clamp(80px, 10vw, 120px); }
 
-        .nav-links ul {
+        .nav-links ul { 
             display: flex;
-            gap: 2rem;
             list-style: none;
         }
 
+        .nav-links ul li { padding: 5px 15px; }
+
         .nav-links ul li a {
-            color: var(--text-main);
+            color: #333;
             text-decoration: none;
-            font-size: 15px;
-            font-weight: 600;
+            font-weight: bold;
+            transition: 0.3s;
         }
+
+        .nav-links ul li a:hover { color: var(--primary); }
 
         /* --- حاوية المحتوى المركزي --- */
         .main-content {
@@ -130,7 +138,7 @@
         .btn-primary {
             width: 100%;
             padding: 16px;
-            background: var(--primary-navy);
+            background: var(  --primary);
             color: var(--white);
             border: none;
             border-radius: 12px;

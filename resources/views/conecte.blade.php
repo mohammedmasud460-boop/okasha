@@ -8,13 +8,18 @@
     <title>تواصل معنا | منصة شهادتي</title>
     <style>
         :root {
-            --primary-navy: #1e1b4b; /* كحلي رسمي صلب */
+            --primary-navy: #1b414bff; /* كحلي رسمي صلب */
             --accent-blue: #4f46e5; /* أزرق احترافي */
             --bg-solid: #f8fafc;    /* خلفية صلبة */
             --text-main: #0f172a;
             --text-muted: #475569;
             --white: #ffffff;
             --border-light: #e2e8f0;
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #14e3faff;
+            --border: rgba(255, 255, 255, 0.3);
             --glass-bg: rgba(255, 255, 255, 0.4);
         }
 
@@ -32,37 +37,36 @@
         }
 
         /* --- شريط التنقل --- */
-        nav {
+      nav {
             display: flex;
-            padding: 0 8%;
-            height: 80px;
+            padding: 10px 5%;
             justify-content: space-between;
             align-items: center;
-            background-color: var(--white);
-            border-bottom: 1px solid var(--border-light);
-            position: fixed;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
             z-index: 1000;
         }
 
-        nav img { height: 45px; width: auto; }
+        nav img { width: clamp(80px, 10vw, 120px); }
 
-        .nav-links ul {
+        .nav-links ul { 
             display: flex;
-            gap: 2rem;
             list-style: none;
         }
 
+        .nav-links ul li { padding: 5px 15px; }
+
         .nav-links ul li a {
-            color: var(--text-main);
+            color: #333;
             text-decoration: none;
-            font-size: 15px;
-            font-weight: 600;
+            font-weight: bold;
+            transition: 0.3s;
         }
 
-        .nav-links ul li a:hover { color: var(--accent-blue); }
+        .nav-links ul li a:hover { color: var(--primary); }
 
         /* أيقونة الجوال */
         .mobile-toggle {
@@ -106,6 +110,12 @@
             font-weight: 700;
             font-size: 1.1rem;
         }
+         .menu-icon {
+           display: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
 
         /* الطبقة المعتمة خلف المنيو */
         .overlay {
@@ -118,13 +128,16 @@
             z-index: 1500;
             display: none;
         }
-        .overlay.active { display: block; }
+
+        .overlay.active {
+            display: block;
+        }
 
         /* --- محتوى الصفحة --- */
         .sub-header {
             height: 30vh;
             width: 100%;
-            background-color: var(--primary-navy);
+            background-color:  var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -192,7 +205,7 @@
         .btn-send {
             width: 100%;
             padding: 16px;
-            background: var(--primary-navy);
+            background: var(--primary);
             color: var(--white);
             border: none;
             border-radius: 10px;
@@ -213,6 +226,7 @@
             .mobile-toggle { display: block; }
             nav { padding: 0 5%; }
             .map-section, .contact-container { width: 95%; }
+             .menu-icon { display: block; } /* إظهار أيقونة المنيو */
         }
     </style>
 </head>
@@ -244,12 +258,10 @@
                 <li><a href="{{ route('about') }}">من نحن</a></li>
             </ul>
         </div>
-        <i class="bx bx-menu-alt-right mobile-toggle" id="openMenu"></i>
+        <i class='bx bx-menu menu-icon' id="openMenu"></i>
     </nav>
 
-    <header class="sub-header">
-        <h1>تواصل معنا</h1>
-    </header>
+   
 
     <section class="map-section">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230660.44310574743!2d46.4919537965416!3d24.725555333580554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d48939b%3A0x103632906373b9e5!2z2KfZhNix2YrYp9i2!5e0!3m2!1sar!2ssa!4v1700000000000!5m2!1sar!2ssa" allowfullscreen="" loading="lazy"></iframe>

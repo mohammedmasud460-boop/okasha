@@ -93,16 +93,12 @@
             margin: 15pt 0;
         }
 
-        .student-name {
-            font-size: 40pt;
-            color: #111827;
+  
+        .name{
+            font-size: 20pt;
             font-weight: bold;
-            text-align: center;
-            border-bottom: 2pt double var(--cert-gold);
-            display: block;
-            width: fit-content;
-            margin: 5pt auto 20pt;
-            padding-bottom: 5pt;
+            color: #111827;
+            
         }
 
         .course-text {
@@ -213,40 +209,46 @@
     </div>
 
     <div class="certificate-container">
-        <div class="certificate-paper">
+       <div class="certificate-paper">
             
             <div class="header">
-                <div class="main-title">شهادة إنجاز</div>
-                <div class="statement">تتشرف المنصة بمنح هذه الشهادة لـ :</div>
+                <div class="main-title">شهادة إجتياز</div><br><br>
+                <div class="statement">يـسرنا أن نشـهد بأن المتدرب/ـة: <span class="name">{{ $student->name }}</span></div>
             </div>
 
-            <div class="recipient">
-                <div class="student-name">{{ $student->name }}</div>
-            </div>
+            
 
             <div class="course-text">
-                وذلك لاجتيازه بنجاح البرنامج التدريبي بعنوان:<br>
-                <span class="course-name">" {{ $student->course }} "</span><br>
-                والمنعقد في تاريخ {{ $student->course_date }}م بتقدير {{ $student->degree }}%
+               قد اجتاز بنجاح الدورة التدريبية بعنوان :
+                <span class="course-name">" {{ $student->course }} "</span><span style="color: #1e293b;"> التي أقيمت في مركزنا التدريبي</span><br><br>
+             
+والمنعقد في تاريخ {{ $student->course_date->format('Y-m-d') }} م وقد حصل على تقدير عام : {{ $student->degree }}
             </div>
-
-            <div class="cert-footer">
-                <div class="footer-box right">
-                    <div class="label-text">مدرب البرنامج</div>
-                    <div class="sig-line"></div>
-                    <div class="name-text">أ.{{ auth()->user()->name }}</div>
-                </div>
-
-                <div class="footer-box">
-                    <div class="seal-box">الختم الرسمي</div>
-                </div>
-
-                <div class="footer-box left">
-                    <div class="label-text">التوقيع </div>
-                    <div class="sig-line"></div>
-                    <div class="name-text"></div>
-                </div>
+            <div class="course-text">بناءً عليه، مُنحت له هذه الشهادة تقديراً لجهوده وتمنياتنا له بمزيد من التوفيق والنجاح.</div><br><br>
+            <div class="date-text" style="text-align: center; font-size: 14pt; color: #475569; margin-bottom: 10pt;">
+                صدر في: {{ \Carbon\Carbon::now()->format('Y-m-d') }}
             </div>
+          <table class="footer-table" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+    <tr>
+        <td class="footer-cell" style="width: 33%; text-align: center;">
+         
+            <div class="label-text">الجهة</div>
+              <div class="sig-line"></div>
+            <div class="name-text">{{ auth()->user()->name }}</div>
+        </td>
+
+        <td class="footer-cell" style="width: 33%; text-align: center; vertical-align: middle;">
+            <div class="seal-box" style="margin: 0 auto;">الختم الرسمي</div>
+        </td>
+
+        <td class="footer-cell" style="width: 33%; text-align: center;">
+          
+            <div class="label-text">اعتماد التوقيع</div>
+              <div class="sig-line"></div>
+            <div class="name-text">رقمي</div>
+        </td>
+    </tr>
+</table>
 
         </div>
     </div>

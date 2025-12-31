@@ -81,7 +81,29 @@
             font-weight: 600;
             color: #374151;
         }
+/* عدل هذا الجزء في كود الـ CSS الخاص بك */
+input, select { 
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    background: #fff;
+    transition: 0.3s;
+    box-sizing: border-box;
+    /* إضافة شكل السهم بشكل أنيق */
+    appearance: none; 
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 15px center; /* جعل السهم جهة اليسار لأن الكتابة عربي */
+    background-size: 1em;
+}
 
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
         input {
             width: 100%;
             padding: 12px 15px;
@@ -226,12 +248,17 @@
                 </div>
 
                 <div class="field" style="flex: 1;">
-                    <label>الدرجة %</label>
-                    <input type="number" name="degree" value="{{ old('degree', $student->degree) }}" min="0" max="100" required>
+                    <label>الدرجة </label>
+                     <select name="degree" required>
+        <option value="" disabled>اختر التقدير</option>
+        <option value="ممتاز" {{ old('degree', $student->degree) == 'ممتاز' ? 'selected' : '' }}>ممتاز</option>
+        <option value="جيد جداً" {{ old('degree', $student->degree) == 'جيد جداً' ? 'selected' : '' }}>جيد جداً</option>
+        <option value="جيد" {{ old('degree', $student->degree) == 'جيد' ? 'selected' : '' }}>جيد</option>
+        <option value="مقبول" {{ old('degree', $student->degree) == 'مقبول' ? 'selected' : '' }}>مقبول</option>
+    </select>
                     @error('degree') <div class="error">{{ $message }}</div> @enderror
                 </div>
             </div>
-
             <div class="actions">
                 <button type="submit" class="btn btn-primary">تحديث البيانات</button>
                 <a href="{{ route('dashboard') }}" class="btn btn-outline">رجوع</a>
