@@ -2,84 +2,116 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* إعدادات الخلفية المستوحاة من تصميمك */
+        /* إعدادات البريد العامة لضمان التوافق */
         body {
-            background-color: #f0fdfa;
-            background-image: linear-gradient(to top right, #5ce7f6, #ffffff);
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
+            width: 100% !important;
+            background-color: #f0fdfa;
+            -webkit-text-size-adjust: none;
+            -ms-text-size-adjust: none;
         }
 
-        /* حاوية الإيميل المركزية كأنها لوحة زجاجية */
         .email-wrapper {
             width: 100%;
+            background-color: #f0fdfa;
+            background-image: linear-gradient(to top right, #5ce7f6, #ffffff);
             padding: 40px 0;
+            direction: rtl;
         }
 
         .email-content {
             max-width: 600px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.7); /* خلفية شفافة */
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.85); /* زيادة كثافة اللون لضمان وضوح القراءة */
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
             overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
         }
 
-        /* الهيدر مع اللوجو */
         .header {
-            background: rgba(255, 255, 255, 0.4);
-            padding: 20px;
+            padding: 30px;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .header img {
-            width: 120px;
+            max-width: 150px;
+            height: auto;
         }
 
-        /* جسم الرسالة */
         .body {
-            padding: 40px 30px;
+            padding: 40px 35px;
             text-align: center;
         }
 
-        h1 {
-            color: #4f46e5; /* لون البريماري من تصميمك */
-            font-size: 24px;
-            margin-bottom: 20px;
+      h1 {
+    color: #18181b;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 0;
+    /* التعديل هنا لضمان التوسيط */
+    text-align: center !important; 
+}
+
+    p {
+    font-size: 16px;
+    line-height: 1.5em;
+    margin-top: 0;
+    /* التعديل هنا لتوسيط الفقرات */
+    text-align: center !important;
+}
+
+/* لضمان توسيط القوائم إذا وجدت */
+ul, ol, blockquote {
+    text-align: center;
+}
+        .button-container {
+            margin: 35px 0;
         }
 
-        p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 30px;
-        }
-
-        /* الزر المنسق بنفس ستايل الموقع */
         .button {
             display: inline-block;
             background-color: #4f46e5;
             color: #ffffff !important;
-            padding: 12px 30px;
-            border-radius: 10px;
+            padding: 14px 40px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+            font-size: 16px;
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
         }
 
-        /* التذييل */
+        .salutation {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 16px;
+            color: #4f46e5;
+            font-weight: bold;
+        }
+
         .footer {
-            padding: 20px;
-            font-size: 12px;
+            padding: 25px;
+            font-size: 13px;
             color: #6b7280;
             text-align: center;
-            background: rgba(0, 0, 0, 0.02);
+            background: rgba(0, 0, 0, 0.03);
+            line-height: 1.5;
+        }
+
+        .raw-link {
+            display: block;
+            margin-top: 15px;
+            word-break: break-all;
+            color: #4f46e5;
+            text-decoration: none;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -88,48 +120,47 @@
         <div class="email-content">
             
             <div class="header">
-<img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('image/logono.png'))) }}" alt="logo">            </div>
+                {{-- استخدام $message->embed لضمان ظهور الصورة --}}
+                <img src="{{ $message->embed(public_path('image/logono.png')) }}" alt="شعار المنصة">
+            </div>
 
             <div class="body">
-                {{-- Greeting --}}
-                @if (! empty($greeting))
-                    <h1>{{ $greeting }}</h1>
-                @else
-                    <h1>@lang('مرحباً!')</h1>
-                @endif
+                {{-- التحية --}}
+                <h1>{{ $greeting ?? 'مرحباً بك!' }}</h1>
 
-                {{-- Intro Lines --}}
+                {{-- رسائل المقدمة --}}
                 @foreach ($introLines as $line)
                     <p>{{ $line }}</p>
                 @endforeach
 
-                {{-- Action Button --}}
+                {{-- زر الإجراء --}}
                 @isset($actionText)
-                    <a href="{{ $actionUrl }}" class="button">
-                        {{ $actionText }}
-                    </a>
+                    <div class="button-container">
+                        <a href="{{ $actionUrl }}" class="button">
+                            {{ $actionText }}
+                        </a>
+                    </div>
                 @endisset
 
-                {{-- Outro Lines --}}
+                {{-- رسائل الخاتمة --}}
                 @foreach ($outroLines as $line)
-                    <p style="margin-top: 20px;">{{ $line }}</p>
+                    <p>{{ $line }}</p>
                 @endforeach
 
-                {{-- Salutation --}}
-                <div style="margin-top: 30px; font-weight: bold; color: #4f46e5;">
+                {{-- التوقيع --}}
+                <div class="salutation">
                     @if (! empty($salutation))
                         {{ $salutation }}
                     @else
-                        @lang('تحياتنا،')<br>
-                        {{ config('app.name') }}
+                        تحياتنا،<br>
+                        فريق {{ config('app.name') }}
                     @endif
                 </div>
             </div>
 
             <div class="footer">
-                @lang("إذا كنت تواجه مشكلة في الضغط على زر \":actionText\"، قم بنسخ الرابط أدناه ولصقه في متصفحك:", ['actionText' => $actionText])
-                <br>
-                <span style="word-break: break-all; color: #4f46e5;">{{ $actionUrl }}</span>
+                إذا كنت تواجه مشكلة في الضغط على زر "{{ $actionText ?? 'الإجراء' }}"، قم بنسخ الرابط أدناه ولصقه في متصفحك:
+                <a href="{{ $actionUrl ?? '#' }}" class="raw-link">{{ $actionUrl ?? '' }}</a>
             </div>
         </div>
     </div>

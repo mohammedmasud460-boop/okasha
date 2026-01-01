@@ -132,6 +132,27 @@
         .overlay.active {
             display: block;
         }
+        .alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
 
         /* --- محتوى الصفحة --- */
         .sub-header {
@@ -264,7 +285,7 @@
    
 
     <section class="map-section">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230660.44310574743!2d46.4919537965416!3d24.725555333580554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d48939b%3A0x103632906373b9e5!2z2KfZhNix2YrYp9i2!5e0!3m2!1sar!2ssa!4v1700000000000!5m2!1sar!2ssa" allowfullscreen="" loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d10409.926481390581!2d39.76678060243447!3d21.450138639021997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sar!2ssa!4v1767222893841!5m2!1sar!2ssa" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </section>
 
     <main class="contact-container">
@@ -273,33 +294,45 @@
                 <i class='bx bx-map-pin'></i>
                 <div>
                     <h5>الموقع الرئيسي</h5>
-                    <p>المملكة العربية السعودية، الرياض<br>حي العليا، برج الابتكار</p>
+                    <p>المملكة العربية السعودية، مكة<br>حي الزايدي, معهد هرماس </p>
                 </div>
             </div>
             <div class="info-item">
                 <i class='bx bx-envelope'></i>
                 <div>
                     <h5>البريد الإلكتروني</h5>
-                    <p>support@shahadati.sa<br>info@shahadati.sa</p>
+                    <p>mohammed.masud460@gmail.com<br>info@shahadati.sa</p>
                 </div>
             </div>
             <div class="info-item">
                 <i class='bx bx-phone-call'></i>
                 <div>
                     <h5>الدعم الفني</h5>
-                    <p>920000000<br>من الأحد للخميس (8ص - 4م)</p>
+                    <p>+966557977270<br>من الأحد للخميس (8ص - 4م)</p>
                 </div>
             </div>
         </div>
 
         <div class="contact-form">
-            <form action="#">
-                <input type="text" placeholder="الاسم الكامل" required>
-                <input type="email" placeholder="البريد الإلكتروني" required>
-                <input type="text" placeholder="عنوان الرسالة" required>
-                <textarea rows="5" placeholder="كيف يمكننا مساعدتك؟" required></textarea>
-                <button type="submit" class="btn-send">إرسال الرسالة</button>
-            </form>
+             @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+        <form action="{{ route('contact.send') }}" method="POST">
+    @csrf
+    <input type="text" name="name" placeholder="الاسم الكامل" required>
+    <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+    <input type="text" name="subject" placeholder="عنوان الرسالة" required>
+    <textarea name="message" rows="5" placeholder="كيف يمكننا مساعدتك؟" required></textarea>
+    <button type="submit" class="btn-send">إرسال الرسالة</button>
+</form>
         </div>
     </main>
 

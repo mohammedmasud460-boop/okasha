@@ -47,7 +47,7 @@
 
         nav img { width: clamp(80px, 10vw, 120px); }
 
-        .nav-links ul { display: flex; list-style: none; gap: 15px; }
+        .nav-links ul { display: flex; list-style: none; gap: 15px;  }
         .nav-links ul li a {
             color: #333;
             text-decoration: none;
@@ -126,6 +126,30 @@
             border-color: var(--primary);
             box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
         }
+        .nav-logout-link {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+    /* تأكد أن هذه القيم تطابق تنسيق الروابط (a) لديك */
+    color: #ef4444; /* اللون الأحمر */
+    text-decoration: none;
+    font-size: 14px; 
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-logout-link:hover {
+    color: #b91c1c; /* أحمر أغمق عند التمرير */
+    text-decoration: underline;
+}
+
+/* لضمان التنسيق داخل القائمة */
+ul li form {
+    display: inline;
+}
 
         /* --- الأزرار --- */
         .actions { display: flex; gap: 12px; align-items: center; margin-top: 10px; }
@@ -194,9 +218,9 @@
             <ul>
                 <li><a href="{{ route('welcome1') }}">الرئيسية</a></li>
                 <li><a href="{{ route('dashboard') }}">قائمة الطلاب</a></li>
-                 <li><a><form method="POST" action="{{ route('logout') }}">
+                 <li><form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="btn-logout">
+                    <button type="submit" class="nav-logout-link">
                         تسجيل الخروج
                     </button>
                 </form></li>

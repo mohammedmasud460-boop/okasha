@@ -78,7 +78,7 @@
         }
 
         .main-title {
-            color: var(--cert-navy);
+          
             font-size: 48pt;
             font-weight: 800;
             text-align: center;
@@ -110,7 +110,7 @@
         }
 
         .course-name {
-            color: var(--cert-navy);
+      
             font-weight: bold;
             font-size: 24pt;
         }
@@ -170,6 +170,66 @@
             margin: 0 auto;
         }
 
+        /* حاوية الأزرار الرئيسية */
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px; /* المسافة بين الأزرار */
+    margin-top: 30px;
+    flex-wrap: wrap; /* لضمان التناسق في الشاشات الصغيرة */
+}
+
+/* التنسيق العام لجميع الأزرار */
+.btn, .btn-send {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    height: 42px; /* توحيد الطول */
+}
+
+/* زر تحميل PDF */
+.btn-download {
+     background: #4f46e5;
+            color: white;
+}
+.btn-download:hover { background-color: #1e40af; transform: translateY(-2px); }
+
+/* زر الرجوع */
+.btn-back {
+     background: #4f46e5;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 10;
+}
+.btn-back:hover { background-color: #475569; transform: translateY(-2px); }
+
+/* زر إرسال للبريد */
+.btn-send {
+    background: #4f46e5;
+            color: white;
+}
+.btn-send:hover { background-color: #047857; transform: translateY(-2px); }
+
+/* أيقونات داخل الأزرار */
+.btn span, .btn i {
+    margin-left: 8px;
+}
+
+.inline-form {
+    display: inline-block;
+}
         /* --- ميزات الجوال --- */
         @media screen and (max-width: 1024px) {
             .certificate-paper {
@@ -193,21 +253,35 @@
 </head>
 <body>
 
-    <div class="actions">
-        <a href="{{ route('pdf.download1', $student->id) }}" class="btn btn-download">💾 تحميل PDF</a>
-        <a href="javascript:history.back()" class="btn btn-back">↩ رجوع</a>
-        <div class="template-actions">
-   
+ <div class="actions">
+    <a href="{{ route('pdf.download1', $student->id) }}" class="btn btn-download">
+        <span>💾</span> تحميل PDF
+    </a>
+    
+    <a href="javascript:history.back()" class="btn btn-back">
+        <span>↩</span> رجوع
+    </a>
 
-    <form action="{{ route('certificates.sendEmail', [$student->id, 1]) }}" method="POST" style="display: inline;">
+    <form action="{{ route('certificates.sendEmail', [$student->id, 1]) }}" method="POST" class="inline-form">
         @csrf
-        <button type="submit" class="btn-send" onclick="return confirm('هل أنت متأكد من إرسال الشهادة لبريد الطالب؟')">
-            <i class='bx bx-paper-plane'></i> إرسال للبريد
+        <button type="submit" class="btn btn-send" onclick="return confirm('هل أنت متأكد من إرسال الشهادة لبريد الطالب؟')">
+            <i class='bx bx-paper-plane'></i> إرسال الشهادة الى بريد الطالب 
         </button>
     </form>
 </div>
-    </div>
+<div class="container mt-3">
+    @if(session('success'))
+        <div class="alert alert-success" style="background: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
+            {{ session('success') }}
+        </div>
+    @endif
 
+    @if(session('error'))
+        <div class="alert alert-danger" style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+            {{ session('error') }}
+        </div>
+    @endif
+</div>
     <div class="certificate-container">
        <div class="certificate-paper">
             

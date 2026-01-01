@@ -29,7 +29,7 @@
         }
 
         .main-title {
-            color: #1e3a8a;
+        
             font-size: 48pt;
             font-weight: bold;
             padding-top: 60pt; /* تعديل الإزاحة لتناسب تصميم الخلفية */
@@ -44,7 +44,7 @@
         }
 
         .student-name {
-            font-size: 40pt;
+          
             color: #111827;
             font-weight: bold;
             margin: 10pt auto 20pt;
@@ -62,9 +62,9 @@
         }
 
         .course-name {
-            color: #1e3a8a;
+        
             font-weight: bold;
-            font-size: 24pt;
+          
         }
 
         /* استخدام الجداول هو الحل الوحيد المضمون في mPDF لتوزيع العناصر جانبيًا */
@@ -72,6 +72,7 @@
             width: 85%;
             margin: 40pt auto 0;
             border-collapse: collapse;
+            
         }
 
         .footer-cell {
@@ -120,6 +121,7 @@
             /* تأثير دوران بسيط كما في الكود السابق */
             transform: rotate(-15deg);
         }
+        
     </style>
 </head>
 <body>
@@ -127,12 +129,12 @@
             
             <div class="header">
                 <div class="main-title">شهادة إجتياز</div><br><br>
-                <div class="statement">يـسرنا أن نشـهد بأن المتدرب/ـة: <span class="name">{{ $student->name }}</span></div>
+                <div class="statement">يـسرنا أن نشـهد بأن المتدرب/ـة: <span class="student-name">{{ $student->name }}</span></div>
             </div>
 
             
 
-            <div class="course-text">
+            <div class="course-text" >
                قد اجتاز بنجاح الدورة التدريبية بعنوان :
                 <span class="course-name">" {{ $student->course }} "</span><span style="color: #1e293b;"> التي أقيمت في مركزنا التدريبي</span><br><br>
              

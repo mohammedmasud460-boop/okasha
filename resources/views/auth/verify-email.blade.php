@@ -16,11 +16,6 @@
             --white: #ffffff;
             --border-light: #e2e8f0;
             --success: #16a34a;
-               --primary: #4f46e5;
-            --primary-dark: #4338ca;
-            --secondary: #14e3faff;
-            --border: rgba(255, 255, 255, 0.3);
-            --glass-bg: rgba(255, 255, 255, 0.4);
         }
 
         * {
@@ -138,7 +133,7 @@
         .btn-primary {
             width: 100%;
             padding: 16px;
-            background: var(  --primary);
+            background: var(--primary-navy);
             color: var(--white);
             border: none;
             border-radius: 12px;

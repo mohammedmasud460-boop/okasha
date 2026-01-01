@@ -29,7 +29,7 @@
         }
 
         .main-title {
-            color: #1e3a8a;
+        
             font-size: 48pt;
             font-weight: bold;
             padding-top: 60pt; /* تعديل الإزاحة لتناسب تصميم الخلفية */
@@ -44,7 +44,7 @@
         }
 
         .student-name {
-            font-size: 40pt;
+          
             color: #111827;
             font-weight: bold;
             margin: 10pt auto 20pt;
@@ -62,9 +62,9 @@
         }
 
         .course-name {
-            color: #1e3a8a;
+        
             font-weight: bold;
-            font-size: 24pt;
+          
         }
 
         /* استخدام الجداول هو الحل الوحيد المضمون في mPDF لتوزيع العناصر جانبيًا */
@@ -129,22 +129,22 @@
             
             <div class="header">
                 <div class="main-title">شهادة إجتياز</div><br><br>
-                <div class="statement">يـسرنا أن نشـهد بأن المتدرب/ـة: <span class="name">{{ $student->name }}</span></div>
+                <div class="statement">يـسرنا أن نشـهد بأن المتدرب/ـة: <span class="student-name">{{ $student->name }}</span></div>
             </div>
 
             
 
-            <div class="course-text">
+            <div class="course-text" >
                قد اجتاز بنجاح الدورة التدريبية بعنوان :
                 <span class="course-name">" {{ $student->course }} "</span><span style="color: #1e293b;"> التي أقيمت في مركزنا التدريبي</span><br><br>
              
 والمنعقد في تاريخ {{ $student->course_date->format('Y-m-d') }} م وقد حصل على تقدير عام : {{ $student->degree }}
             </div>
             <div class="course-text">بناءً عليه، مُنحت له هذه الشهادة تقديراً لجهوده وتمنياتنا له بمزيد من التوفيق والنجاح.</div><br><br>
-            <div class="date-text" style="text-align: center; font-size: 14pt; color: #475569; margin-bottom: 40pt;">
+            <div class="date-text" style="text-align: center; font-size: 14pt; color: #475569; margin-bottom: 10pt;">
                 صدر في: {{ \Carbon\Carbon::now()->format('Y-m-d') }}
             </div>
-          <table class="footer-table" style="width: 100%; border-collapse: collapse; margin-top: 50px;">
+          <table class="footer-table" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
     <tr>
         <td class="footer-cell" style="width: 33%; text-align: center;">
             <div class="sig-line"></div>

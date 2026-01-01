@@ -88,6 +88,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/certificates/download8/{student}', [CertificateController::class, 'download8'])->name('pdf.download8');
     Route::get('/certificates/download9/{student}', [CertificateController::class, 'download9'])->name('pdf.download9');
 });
+
+
+Route::post('/contact-send', [App\Http\Controllers\ContactController::class, 'send'])->name('contact.send');
+
 // مسار إرسال الشهادة عبر البريد الإلكتروني
 // مسار إرسال الشهادة عبر البريد
 Route::post('/certificates/send-email/{student}/{templateNum}', [CertificateController::class, 'sendEmail'])

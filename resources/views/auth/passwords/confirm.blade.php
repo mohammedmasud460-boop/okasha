@@ -1,80 +1,47 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>تأكيد كلمة المرور</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="shortcut icon" href="{{asset('image/logono.png')}}" type="image/x-icon">
 
-  <style>
-    :root{
-      --bg:#f7f7fb; --card:#fff; --text:#1f2937; --muted:#6b7280;
-      --primary:#4f46e5; --primary-dark:#4338ca; --danger:#dc2626;
-      --border:#e5e7eb; --ring:#c7d2fe;
-    }
-    html,body{
-      margin:0; padding:0; background:var(--bg); color:var(--text);
-      font-family:"Tahoma","Segoe UI",system-ui,Arial,sans-serif; line-height:1.6;
-    }
-    .container{max-width:720px; margin:40px auto; padding:0 16px;}
-    .card{
-      background:var(--card); border:1px solid var(--border); border-radius:12px;
-      box-shadow:0 8px 24px rgba(0,0,0,.06); padding:24px;
-    }
-    h1{margin:0 0 8px; font-size:22px;}
-    .subtitle{color:var(--muted); font-size:14px; margin-bottom:16px;}
-
-    .field{margin-bottom:14px;}
-    .label{display:block; margin-bottom:6px; font-size:14px; color:#374151;}
-    .input{
-      width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px;
-      font-size:14px; background:white; color:var(--text);
-      transition:border-color .15s, box-shadow .15s;
-    }
-    .input:focus{
-      outline:none; border-color:var(--primary);
-      box-shadow:0 0 0 4px var(--ring);
-    }
-    .error{margin-top:6px; color:var(--danger); font-size:12px;}
-
-    .actions{display:flex; align-items:center; gap:12px; margin-top:16px; flex-wrap:wrap;}
-    .btn{
-      appearance:none; border:none; border-radius:10px; background:var(--primary);
-      color:white; padding:10px 16px; font-size:14px; cursor:pointer;
-      transition:background .15s, transform .05s;
-    }
-    .btn:hover{background:var(--primary-dark);}
-    .btn:active{transform:scale(.99);}
-    .link{color:#374151; text-decoration:underline; font-size:13px;}
-  </style>
+    <title>تأكيد الهوية | منصة شهادتي</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        :root { --primary: #4f46e5; --primary-dark: #4338ca; --border: #e5e7eb; --danger: #dc2626; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-image: linear-gradient(to top right, #5ce7f6ff, #ffffffff); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .wrapper { width: clamp(320px, 90vw, 450px); background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 20px; padding: 40px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); }
+        h1 { font-size: 24px; text-align: center; color: var(--primary); margin-bottom: 10px; font-weight: 800; }
+        .subtitle { text-align: center; color: #6b7280; font-size: 14px; margin-bottom: 25px; line-height: 1.6; }
+        .input-box { position: relative; width: 100%; height: 50px; margin: 20px 0; }
+        .input-box input { width: 100%; height: 100%; background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 0 45px 0 15px; outline: none; transition: 0.3s; }
+        .input-box i { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 20px; color: var(--primary); }
+        .btn { width: 100%; height: 48px; background: var(--primary); border: none; border-radius: 12px; color: #fff; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .error-message { color: var(--danger); font-size: 12px; margin-top: -15px; margin-bottom: 10px; }
+        .forgot-link { display: block; text-align: center; margin-top: 20px; font-size: 14px; color: var(--primary); text-decoration: none; font-weight: 600; }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <h1>تأكيد كلمة المرور</h1>
-      <div class="subtitle">
-        يرجى تأكيد كلمة المرور قبل المتابعة.
-      </div>
+    <div class="wrapper">
+        <h1>منطقة آمنة</h1>
+        <p class="subtitle">يرجى تأكيد كلمة المرور الخاصة بك قبل المتابعة لمتابعة هذا الإجراء.</p>
 
-      <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
+        <form method="POST" action="{{ route('password.confirm') }}">
+            @csrf
+            <div class="input-box">
+                <input type="password" name="password" placeholder="كلمة المرور الحالية" required autocomplete="current-password">
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            @error('password') <div class="error-message">{{ $message }}</div> @enderror
 
-        <!-- كلمة المرور -->
-        <div class="field">
-          <label class="label" for="password">كلمة المرور</label>
-          <input id="password" type="password" name="password" class="input"
-                 required autocomplete="current-password">
-          @error('password') <div class="error">{{ $message }}</div> @enderror
-        </div>
-
-        <div class="actions">
-          <button type="submit" class="btn">تأكيد كلمة المرور</button>
-          @if (Route::has('password.request'))
-            <a href="{{ route('password.request') }}" class="link">نسيت كلمة المرور؟</a>
-          @endif
-        </div>
-      </form>
+            <button type="submit" class="btn">تأكيد كلمة المرور</button>
+            
+            @if (Route::has('password.request'))
+                <a class="forgot-link" href="{{ route('password.request') }}">نسيت كلمة المرور؟</a>
+            @endif
+        </form>
     </div>
-  </div>
 </body>
 </html>

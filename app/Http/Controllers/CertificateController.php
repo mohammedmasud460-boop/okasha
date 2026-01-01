@@ -243,26 +243,26 @@ private function generateMPDF($student, $templateNum) {
     public function sendEmail(Student $student, $templateNum) 
 {
     try {
-        // 1. تجهيز الصورة (نفس منطق التوليد)
+        // 1. التاكد من وجود القالب
         $imageName = 'qw' . $templateNum . '.jpeg';
         $imagePath = public_path('image/' . $imageName);
         
         if (!file_exists($imagePath)) {
-            return back()->with('error', 'صورة قالب الشهادة غير موجودة.');
+            return back()->with('error', '❌ فشل الإرسال: صورة قالب الشهادة غير موجودة على السيرفر.');
         }
 
         $imgData = file_get_contents($imagePath);
         $base64Image = 'data:image/jpeg;base64,' . base64_encode($imgData);
 
-        // 2. إرسال الإيميل مع تمرير البيانات للـ Constructor
-        // تأكد أن كلاس SendMail يستقبل (Student, TemplateNum, Base64Image)
+        // 2. إرسال الإيميل
+        // ملاحظة: تأكد أن ملف App\Mail\SendMail مهيأ لاستقبال هذه المتغيرات
         \Mail::to($student->email)->send(new \App\Mail\SendMail($student, $templateNum, $base64Image));
 
-        return back()->with('success', 'تم إرسال الشهادة إلى بريد الطالب ' . $student->email . ' بنجاح!');
+        return back()->with('success', '✅ تم إرسال الشهادة إلى البريد (' . $student->email . ') بنجاح!');
         
     } catch (\Exception $e) {
-        // عرض الخطأ في حال فشل الاتصال بسيرفر الإيميل
-        return back()->with('error', 'فشل الإرسال: ' . $e->getMessage());
+        // عرض رسالة الخطأ إذا كانت إعدادات الـ .env غير صحيحة
+        return back()->with('error', '⚠️ لم يتم الإرسال: تأكد من إعدادات SMTP أو اتصال السيرفر. الخطأ: ' . $e->getMessage());
     }
 }
 }

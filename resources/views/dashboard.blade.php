@@ -122,6 +122,40 @@
         #prev { left: 5%; }
         #next { right: 5%; }
 
+        /* تنسيق حاوية الصورة لضمان التوسط */
+.item div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* تنسيق الصورة الشخصية */
+.aimg {
+    width: 120px;          /* عرض ثابت */
+    height: 120px;         /* ارتفاع ثابت */
+    border-radius: 50%;    /* جعل الصورة دائرية تماماً */
+    object-fit: cover;     /* أهم خاصية: تمنع تشوه الصورة وتملأ الدائرة */
+    border: 4px solid #fff; /* إطار أبيض حول الصورة */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* ظل ناعم لإعطاء عمق */
+    margin-bottom: 15px;   /* مسافة بين الصورة والاسم */
+    transition: transform 0.3s ease; /* حركة عند تمرير الماوس */
+}
+
+/* تأثير عند تمرير الماوس على الصورة */
+.aimg:hover {
+    transform: scale(1.05); /* تكبير بسيط جداً */
+    border-color: #4f46e5;  /* تغيير لون الإطار (اختياري حسب لون هويتك) */
+}
+
+/* تنسيق الاسم أسفل الصورة */
+.item h1 {
+    font-size: 1.4rem;
+    color: #333;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
         @media (max-width: 768px) {
             #prev { left: 2%; }
             #next { right: 2%; }
@@ -161,7 +195,7 @@
         @forelse($students as $student)
             <div class="item">
                 <div>
-<img class="aimg" src="{{ $student->image ? asset('storage/' . $student->image) : asset('image/avtare1.png') }}" alt="صورة الطالب">                    <h1>{{ $student->name }}</h1>
+<img class="aimg" src="{{ $student->image ? asset('storage/' . $student->image) : asset('image/avtare1.png') }}" >                    <h1>{{ $student->name }}</h1>
                 
                     <p><strong>الدورة:</strong> {{ $student->course }}</p>
                     <p><strong>الدرجة:</strong> {{ $student->degree }}</p>

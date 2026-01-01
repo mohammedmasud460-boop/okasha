@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إنشاء حساب جديد</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+             <link rel="shortcut icon" href="{{asset('image/logono.png')}}" type="image/x-icon">
+
     <style>
         :root {
             --primary: #4f46e5;

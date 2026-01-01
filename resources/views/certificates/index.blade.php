@@ -42,7 +42,7 @@
                         <h5 class="card-title">القالب العصري</h5>
                         <p class="card-text text-muted small">تصميم بسيط وألوان هادئة للشركات الناشئة.</p>
                         <div class="d-grid gap-2">
-                            <a href="{{ route('certificate.show2', $student->id) }}" class="btn btn-outline-primary">معاينة القالب</a>
+                            <a href="{{ route('certificate.show2', $student->id) }}" class="btn btn-outline-primary"> معاينة القالب</a>
                             <a href="{{ route('pdf.download2', $student->id) }}" class="btn btn-primary">تحميل PDF</a>
                         </div>
                     </div>

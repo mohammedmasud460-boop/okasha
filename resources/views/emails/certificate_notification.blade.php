@@ -62,7 +62,6 @@
         <div class="main-card">
             <div class="header">
                 {{-- تضمين اللوجو باستخدام Base64 لضمان الظهور --}}
-                <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('image/logono.png'))) }}" width="140" alt="لوجو شهادتي">
             </div>
             
             <div class="content">
