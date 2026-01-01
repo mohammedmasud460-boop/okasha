@@ -193,14 +193,14 @@ select:focus {
         <div class="nav-links">
             <ul>
                 <li><a href="{{ route('welcome1') }}">الرئيسية</a></li>
-                <li><a href="{{ route('dashboard') }}">قائمة المستفيدين</a></li>
+                <li><a href="{{ route('dashboard') }}">قائمة الطلاب</a></li>
                  
             </ul>
         </div>
     </nav>
 
     <div class="container">
-        <h2>تعديل بيانات المستفيد</h2>
+        <h2>تعديل بيانات الطلاب</h2>
 
         @if($errors->any())
             <div class="alert-danger">
@@ -217,7 +217,7 @@ select:focus {
             <div class="alert-success">{{ session('success') }}</div>
         @endif
 
-        <form method="POST" action="{{ route('students.update', $student->id) }}">
+        <form method="POST" action="{{ route('students.update', $student->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
 
@@ -259,6 +259,11 @@ select:focus {
                     @error('degree') <div class="error">{{ $message }}</div> @enderror
                 </div>
             </div>
+            <div class="field">
+    <label>تغيير صورة الطالب</label>
+    <input type="file" name="image" accept="image/*">
+    @error('image') <div class="error">{{ $message }}</div> @enderror
+</div>
             <div class="actions">
                 <button type="submit" class="btn btn-primary">تحديث البيانات</button>
                 <a href="{{ route('dashboard') }}" class="btn btn-outline">رجوع</a>

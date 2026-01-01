@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="shortcut icon" href="{{asset('image/logono.png')}}" type="image/x-icon">
-    <title>قائمة المستفيدين</title>
+    <title>قائمة الطلاب</title>
     <style>
         :root {
             --primary: #4f46e5;
@@ -188,7 +188,7 @@
 </nav>
 
 <div class="container">
-    <h2>قائمة المستفيدين</h2>
+    <h2>قائمة الطلاب</h2>
     <a href="{{ route('students.create') }}" class="btn btn-primary">إضافة طالب +</a>
 
     <div class="slider">

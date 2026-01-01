@@ -287,7 +287,7 @@
             
             <div class="header">
                 <div class="main-title">شهادة إجتياز</div><br><br>
-                <div class="statement">يـسرنا أن نشـهد بأن المتدرب/ـة: <span class="name">{{ $student->name }}</span></div>
+              <div class="statement">يشـهد معهد {{ auth()->user()->name }}  بأن المتدرب/ـة : <span class="name">{{ $student->name }}</span></div>
             </div>
 
             
@@ -296,11 +296,11 @@
                قد اجتاز بنجاح الدورة التدريبية بعنوان :
                 <span class="course-name">" {{ $student->course }} "</span><span style="color: #1e293b;"> التي أقيمت في مركزنا التدريبي</span><br><br>
              
-والمنعقد في تاريخ {{ $student->course_date->format('Y-m-d') }} م وقد حصل على تقدير عام : {{ $student->degree }}
+والمنعقدة بتاريخ {{ $student->course_date->format('Y-m-d') }} م وقد حصل على تقدير عام : {{ $student->degree }}
             </div>
             <div class="course-text">بناءً عليه، مُنحت له هذه الشهادة تقديراً لجهوده وتمنياتنا له بمزيد من التوفيق والنجاح.</div><br><br>
-            <div class="date-text" style="text-align: center; font-size: 14pt; color: #475569; ">
-                صدر في: {{ \Carbon\Carbon::now()->format('Y-m-d') }}
+            <div class="date-text" style="text-align: center; font-size: 14pt; color: #475569; margin-bottom: 10pt;">
+                صدرة في: {{ \Carbon\Carbon::now()->format('Y-m-d') }}
             </div>
           <table class="footer-table" style="width: 100%; border-collapse: collapse; ">
     <tr>

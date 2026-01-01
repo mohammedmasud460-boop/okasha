@@ -7,6 +7,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -91,23 +92,32 @@ public function edit($id) {
 
 
 
-public function update(Request $request, $id)
+public function update(Request $request, Student $student)
 {
-    $student = Student::findOrFail($id);
-
     $validated = $request->validate([
-        'name'        => 'sometimes|required|string|max:255',
-        'email'       => 'sometimes|required|string|email|max:255|unique:students,email,' . $id,
-        'course'      => 'sometimes|required|string|max:255',
-        'course_date' => 'sometimes|date',
-        'degree'      => 'sometimes|string|min:0|max:100',
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:students,email,' . $student->id,
+        'course' => 'required|string',
+        'course_date' => 'required|date',
+        'degree' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // التحقق من الصورة
     ]);
+
+    // معالجة رفع الصورة إذا وجدت
+    if ($request->hasFile('image')) {
+        // حذف الصورة القديمة إذا رغبت (اختياري)
+        if ($student->image && Storage::exists('public/' . $student->image)) {
+            Storage::delete('public/' . $student->image);
+        }
+        
+        // تخزين الصورة الجديدة
+        $path = $request->file('image')->store('students', 'public');
+        $validated['image'] = $path;
+    }
 
     $student->update($validated);
 
-    return redirect()
-        ->route('dashboard') // أو ارجع لنفس صفحة التعديل إن رغبت: ->route('students.edit', $student->id)
-        ->with('success', 'تم تحديث بيانات المستفيد بنجاح.');
+    return redirect()->back()->with('success', 'تم تحديث البيانات بنجاح');
 }
 
     /**
