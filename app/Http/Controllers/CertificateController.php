@@ -211,7 +211,7 @@ private function generateMPDF($student, $templateNum) {
     }
 
     // 3. إعدادات mPDF مع استخدام مجلد النظام المؤقت العام لتجنب Permission Denied
-    $mpdf = new \Mpdf\Mpdf([
+    $mpdf = new Mpdf([
         'mode' => 'utf-8',
         'format' => 'A4-L',
     'margin_left' => 0,   // هام جداً: تصفير الهوامش
