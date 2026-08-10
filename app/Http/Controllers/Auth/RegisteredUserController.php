@@ -39,7 +39,13 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        try {
+            event(new Registered($user));
+        } catch (\Exception $e) {
+            Auth::login($user);
+            return redirect(route('dashboard', absolute: false))
+                ->with('error', 'تم إنشاء حسابك بنجاح، لكن تعذّر إرسال بريد التحقق. للمساعدة تواصل مع: mohammed.masud460@gmail.com');
+        }
 
         Auth::login($user);
 
