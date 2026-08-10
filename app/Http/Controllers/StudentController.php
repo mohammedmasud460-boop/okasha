@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Mail\SendMail;
 use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class StudentController extends Controller
 {
@@ -17,23 +18,18 @@ class StudentController extends Controller
   
 
 
-public function index(): View
+public function index(): Response
 {
     $students = Student::where('user_id', auth()->id())->get();
-
-    // بما أن الخطأ في dashboard1.blade.php، مرّر البيانات لهذه الصفحة:
-    return view('dashboard', ['students' => $students]);
-
-    // إن أردت صفحة أخرى:
-    // return view('students.index', compact('students'));
+    return Inertia::render('Dashboard', ['students' => $students]);
 }
 
     /**
      * عرض نموذج إضافة طالب.
      */
-    public function create(): View
+    public function create(): Response
     {
-        return view('Student.create');
+        return Inertia::render('Students/Create');
     }
 
     /**
@@ -85,9 +81,10 @@ public function index(): View
      */
     
 
-public function edit($id) {
+public function edit($id): Response
+{
     $student = Student::findOrFail($id);
-    return view('Student.edit', compact('student'));
+    return Inertia::render('Students/Edit', compact('student'));
 }
 
 

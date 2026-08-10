@@ -1,22 +1,17 @@
 <?php
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProfileController;
-use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CertificateController;
-// عرض الصفحات 
+use Inertia\Inertia;
+
+// ── الصفحات العامة (React / Inertia) ──
 Route::get('/', function () {
-    return view('welcome1');
+    return Inertia::render('Welcome');
 })->name('welcome1');
-Route::get('/services',function (){
-return view('services');
-})->name('services');
-Route::get('/about',function (){
-return view('about');
-})->name('about');
-Route::get('/conecte',function (){
-return view('conecte');
-})->name('conecte');
+Route::get('/services', fn() => Inertia::render('Services'))->name('services');
+Route::get('/about',    fn() => Inertia::render('About'))->name('about');
+Route::get('/conecte',  fn() => Inertia::render('Contact'))->name('conecte');
 
 // مسار عرض لوحة التحكم الرئيسية
 Route::get('/dashboard', function () {

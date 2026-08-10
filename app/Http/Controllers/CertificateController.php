@@ -5,173 +5,40 @@ namespace App\Http\Controllers;
 use Mpdf\Mpdf;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CertificateController extends Controller
 {
     // عرض معرض القوالب للطالب المختار
     public function index(Student $student) {
-        return view('certificates.index', compact('student'));
+        return Inertia::render('Certificates/Index', compact('student'));
     }
 
-    // دوال المعاينة (Preview)
-   public function show1(Student $student) {
-    // تحديد مسار الصورة
-    $path = public_path('image/qw1.jpeg');
-    $base64 = '';
+    // دوال المعاينة — تستدعي مساعداً موحداً
+    public function show1(Student $student) { return $this->renderPreview($student, 1); }
+    public function show2(Student $student) { return $this->renderPreview($student, 2); }
+    public function show3(Student $student) { return $this->renderPreview($student, 3); }
+    public function show4(Student $student) { return $this->renderPreview($student, 4); }
+    public function show5(Student $student) { return $this->renderPreview($student, 5); }
+    public function show6(Student $student) { return $this->renderPreview($student, 6); }
+    public function show7(Student $student) { return $this->renderPreview($student, 7); }
+    public function show8(Student $student) { return $this->renderPreview($student, 8); }
+    public function show9(Student $student) { return $this->renderPreview($student, 9); }
 
-    // التحقق من وجود الصورة وتحويلها
-    if (file_exists($path)) {
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    private function renderPreview(Student $student, int $num) {
+        $path = public_path("image/qw{$num}.jpeg");
+        $base64 = '';
+        if (file_exists($path)) {
+            $ext  = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $base64 = "data:image/{$ext};base64," . base64_encode($data);
+        }
+        return Inertia::render('Certificates/Preview', [
+            'student'         => $student,
+            'templateNum'     => $num,
+            'backgroundImage' => $base64,
+        ]);
     }
-
-    // تمرير الطالب وصورة الخلفية للمعاينة
-    return view('certificates.certificate1', [
-        'student' => $student,
-        'backgroundImage' => $base64
-    ]);
-}
-
-    public function show2(Student $student) {
-// تحديد مسار الصورة
-    $path = public_path('image/qw2.jpeg');
-    $base64 = '';
-
-    // التحقق من وجود الصورة وتحويلها
-    if (file_exists($path)) {
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    }
-
-    // تمرير الطالب وصورة الخلفية للمعاينة
-    return view('certificates.certificate2', [
-        'student' => $student,
-        'backgroundImage' => $base64
-    ]);    }
-
-    public function show3(Student $student) {
-// تحديد مسار الصورة
-    $path = public_path('image/qw3.jpeg');
-    $base64 = '';
-
-    // التحقق من وجود الصورة وتحويلها
-    if (file_exists($path)) {
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    }
-
-    // تمرير الطالب وصورة الخلفية للمعاينة
-    return view('certificates.certificate3', [
-        'student' => $student,
-        'backgroundImage' => $base64
-    ]);    }
-
-     public function show4(Student $student) {
-// تحديد مسار الصورة
-    $path = public_path('image/qw4.jpeg');
-    $base64 = '';
-
-    // التحقق من وجود الصورة وتحويلها
-    if (file_exists($path)) {
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    }
-
-    // تمرير الطالب وصورة الخلفية للمعاينة
-    return view('certificates.certificate4', [
-        'student' => $student,
-        'backgroundImage' => $base64
-    ]);    }
-
-     public function show5(Student $student) {
-// تحديد مسار الصورة
-    $path = public_path('image/qw5.jpeg');
-    $base64 = '';
-
-    // التحقق من وجود الصورة وتحويلها
-    if (file_exists($path)) {
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    }
-
-    // تمرير الطالب وصورة الخلفية للمعاينة
-    return view('certificates.certificate5', [
-        'student' => $student,
-        'backgroundImage' => $base64
-    ]);    }
-     public function show6(Student $student) {
-// تحديد مسار الصورة
-    $path = public_path('image/qw6.jpeg');
-    $base64 = '';
-
-    // التحقق من وجود الصورة وتحويلها
-    if (file_exists($path)) {
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    }
-
-    // تمرير الطالب وصورة الخلفية للمعاينة
-    return view('certificates.certificate6', [
-        'student' => $student,
-        'backgroundImage' => $base64
-    ]);    }
-     public function show7(Student $student) {
-// تحديد مسار الصورة
-    $path = public_path('image/qw7.jpeg');
-    $base64 = '';
-
-    // التحقق من وجود الصورة وتحويلها
-    if (file_exists($path)) {
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    }
-
-    // تمرير الطالب وصورة الخلفية للمعاينة
-    return view('certificates.certificate7', [
-        'student' => $student,
-        'backgroundImage' => $base64
-    ]);    }
-     public function show8(Student $student) {
-// تحديد مسار الصورة
-    $path = public_path('image/qw8.jpeg');
-    $base64 = '';
-
-    // التحقق من وجود الصورة وتحويلها
-    if (file_exists($path)) {
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    }
-
-    // تمرير الطالب وصورة الخلفية للمعاينة
-    return view('certificates.certificate8', [
-        'student' => $student,
-        'backgroundImage' => $base64
-    ]);    }
-     public function show9(Student $student) {
-// تحديد مسار الصورة
-    $path = public_path('image/qw9.jpeg');
-    $base64 = '';
-
-    // التحقق من وجود الصورة وتحويلها
-    if (file_exists($path)) {
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    }
-
-    // تمرير الطالب وصورة الخلفية للمعاينة
-    return view('certificates.certificate9', [
-        'student' => $student,
-        'backgroundImage' => $base64
-    ]);    }
 
     // دوال التحميل (Download) باستخدام mPDF
     // دوال التحميل أصبحت بسيطة وتمرر رقم القالب فقط
