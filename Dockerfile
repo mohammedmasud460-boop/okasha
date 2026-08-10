@@ -5,7 +5,8 @@ RUN apt-get update && apt-get install -y \
     libpng-dev libzip-dev libonig-dev libxml2-dev \
     zip unzip curl git \
     && docker-php-ext-install pdo pdo_mysql mbstring gd zip xml \
-    && a2enmod rewrite \
+    && a2dismod mpm_event mpm_worker || true \
+    && a2enmod mpm_prefork rewrite \
     && rm -rf /var/lib/apt/lists/*
 
 # Node.js 20
